@@ -1,0 +1,78 @@
+package py.com.pol.opendatagui.utils;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.faces.model.SelectItem;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import org.jboss.seam.ScopeType;
+import org.jboss.seam.annotations.Factory;
+import org.jboss.seam.annotations.In;
+import org.jboss.seam.annotations.Name;
+import org.jboss.seam.annotations.Scope;
+
+@Name("selectItemsHelper")
+@Scope(ScopeType.PAGE)
+public class SelectItemsHelper implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@In(create=true)
+	EntityManager entityManager;
+	
+	@SuppressWarnings("unchecked")
+	@Factory(value="areaSelectItems",scope=ScopeType.PAGE,autoCreate=true)
+	public List<SelectItem> areaSelectItems(){
+		String hql="SELECT distinct(lower(m.id.area)) FROM Muebles m  ORDER BY lower(m.id.area) ";
+		
+		Query q=entityManager.createQuery(hql);
+		List<SelectItem> selectItems= new ArrayList<SelectItem>();
+		selectItems.add(new SelectItem(null, "Seleccione..."));
+		List<String> l= q.getResultList();
+		int index=0;
+		for (String area : l) {
+			selectItems.add(new SelectItem(index, area));
+			index++;
+		}
+		
+		return selectItems;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Factory(value="departamentoSelectItems",scope=ScopeType.PAGE,autoCreate=true)
+	public List<SelectItem> departamentoSelectItems(){
+		String hql="SELECT distinct(lower(m.id.departamento)) FROM Muebles m  ORDER BY lower(m.id.departamento) ";
+		List<SelectItem> selectItems= new ArrayList<SelectItem>();
+		selectItems.add(new SelectItem(null, "Seleccione..."));
+		Query q=entityManager.createQuery(hql);
+		List<String> l= q.getResultList();
+
+		for (String dep : l) {
+			selectItems.add(new SelectItem(dep, dep));
+			
+		}
+		return selectItems;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Factory(value="estadoConservacionSelectItems",scope=ScopeType.PAGE,autoCreate=true)
+	public List<SelectItem> estadoConservacionSelectItems(){
+		String hql="SELECT distinct(lower(m.id.estadoConservacion)) FROM Muebles m  ORDER BY lower(m.id.estadoConservacion) ";
+		List<SelectItem> selectItems= new ArrayList<SelectItem>();
+		selectItems.add(new SelectItem(null, "Seleccione..."));
+		Query q=entityManager.createQuery(hql);
+		List<String> l= q.getResultList();
+
+		for (String est : l) {
+			selectItems.add(new SelectItem(est, est));
+			
+		}
+		return selectItems;
+	}
+}

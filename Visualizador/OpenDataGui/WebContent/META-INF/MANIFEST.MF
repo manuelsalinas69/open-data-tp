@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Class-Path: OpenDataGui-ejb.jar 
+ jboss-seam.jar 

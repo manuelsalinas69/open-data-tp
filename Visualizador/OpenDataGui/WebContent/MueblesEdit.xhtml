@@ -1,0 +1,242 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.org/schema/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="muebles" styleClass="edit">
+
+        <rich:panel>
+            <f:facet name="header">#{mueblesHome.managed ? 'Edit' : 'Add'} Muebles</f:facet>
+
+
+            <s:decorate id="unidadJerarquicaField" template="layout/edit.xhtml">
+                <ui:define name="label">Unidad jerarquica</ui:define>
+                <h:inputTextarea id="unidadJerarquica"
+                               cols="80"
+                               rows="6"
+                           disabled="#{mueblesHome.managed}"
+                              value="#{mueblesHome.instance.id.unidadJerarquica}"/>
+            </s:decorate>
+
+            <s:decorate id="codigoReparticionField" template="layout/edit.xhtml">
+                <ui:define name="label">Codigo reparticion</ui:define>
+                <h:inputTextarea id="codigoReparticion"
+                               cols="80"
+                               rows="6"
+                           disabled="#{mueblesHome.managed}"
+                              value="#{mueblesHome.instance.id.codigoReparticion}"/>
+            </s:decorate>
+
+            <s:decorate id="nombreReparticionField" template="layout/edit.xhtml">
+                <ui:define name="label">Nombre reparticion</ui:define>
+                <h:inputTextarea id="nombreReparticion"
+                               cols="80"
+                               rows="6"
+                           disabled="#{mueblesHome.managed}"
+                              value="#{mueblesHome.instance.id.nombreReparticion}"/>
+            </s:decorate>
+
+            <s:decorate id="codigoDependenciaField" template="layout/edit.xhtml">
+                <ui:define name="label">Codigo dependencia</ui:define>
+                <h:inputTextarea id="codigoDependencia"
+                               cols="80"
+                               rows="6"
+                           disabled="#{mueblesHome.managed}"
+                              value="#{mueblesHome.instance.id.codigoDependencia}"/>
+            </s:decorate>
+
+            <s:decorate id="nombreDependenciaField" template="layout/edit.xhtml">
+                <ui:define name="label">Nombre dependencia</ui:define>
+                <h:inputTextarea id="nombreDependencia"
+                               cols="80"
+                               rows="6"
+                           disabled="#{mueblesHome.managed}"
+                              value="#{mueblesHome.instance.id.nombreDependencia}"/>
+            </s:decorate>
+
+            <s:decorate id="areaField" template="layout/edit.xhtml">
+                <ui:define name="label">Area</ui:define>
+                <h:inputTextarea id="area"
+                               cols="80"
+                               rows="6"
+                           disabled="#{mueblesHome.managed}"
+                              value="#{mueblesHome.instance.id.area}"/>
+            </s:decorate>
+
+            <s:decorate id="cuentaField" template="layout/edit.xhtml">
+                <ui:define name="label">Cuenta</ui:define>
+                <h:inputTextarea id="cuenta"
+                               cols="80"
+                               rows="6"
+                           disabled="#{mueblesHome.managed}"
+                              value="#{mueblesHome.instance.id.cuenta}"/>
+            </s:decorate>
+
+            <s:decorate id="subcuentaField" template="layout/edit.xhtml">
+                <ui:define name="label">Subcuenta</ui:define>
+                <h:inputTextarea id="subcuenta"
+                               cols="80"
+                               rows="6"
+                           disabled="#{mueblesHome.managed}"
+                              value="#{mueblesHome.instance.id.subcuenta}"/>
+            </s:decorate>
+
+            <s:decorate id="especificacionField" template="layout/edit.xhtml">
+                <ui:define name="label">Especificacion</ui:define>
+                <h:inputTextarea id="especificacion"
+                               cols="80"
+                               rows="6"
+                           disabled="#{mueblesHome.managed}"
+                              value="#{mueblesHome.instance.id.especificacion}"/>
+            </s:decorate>
+
+            <s:decorate id="descripcionField" template="layout/edit.xhtml">
+                <ui:define name="label">Descripcion</ui:define>
+                <h:inputTextarea id="descripcion"
+                               cols="80"
+                               rows="6"
+                           disabled="#{mueblesHome.managed}"
+                              value="#{mueblesHome.instance.id.descripcion}"/>
+            </s:decorate>
+
+            <s:decorate id="fechaAdquisicionField" template="layout/edit.xhtml">
+                <ui:define name="label">Fecha adquisicion</ui:define>
+                <h:inputText id="fechaAdquisicion"
+                       disabled="#{mueblesHome.managed}"
+                          size="50"
+                     maxlength="50"
+                         value="#{mueblesHome.instance.id.fechaAdquisicion}">
+                    <a:ajax event="blur" render="fechaAdquisicionField" bypassUpdates="true"/>
+                </h:inputText>
+            </s:decorate>
+
+            <s:decorate id="rotuladoField" template="layout/edit.xhtml">
+                <ui:define name="label">Rotulado</ui:define>
+                <h:inputTextarea id="rotulado"
+                               cols="80"
+                               rows="6"
+                           disabled="#{mueblesHome.managed}"
+                              value="#{mueblesHome.instance.id.rotulado}"/>
+            </s:decorate>
+
+            <s:decorate id="cantidadField" template="layout/edit.xhtml">
+                <ui:define name="label">Cantidad</ui:define>
+                <h:inputText id="cantidad"
+                          value="#{mueblesHome.instance.id.cantidad}"
+                           size="29">
+                    <a:ajax event="blur" render="cantidadField" bypassUpdates="true"/>
+                </h:inputText>
+            </s:decorate>
+
+            <s:decorate id="valorUnitarioField" template="layout/edit.xhtml">
+                <ui:define name="label">Valor unitario</ui:define>
+                <h:inputText id="valorUnitario"
+                          value="#{mueblesHome.instance.id.valorUnitario}"
+                           size="29">
+                    <a:ajax event="blur" render="valorUnitarioField" bypassUpdates="true"/>
+                </h:inputText>
+            </s:decorate>
+
+            <s:decorate id="valorTotalField" template="layout/edit.xhtml">
+                <ui:define name="label">Valor total</ui:define>
+                <h:inputText id="valorTotal"
+                          value="#{mueblesHome.instance.id.valorTotal}"
+                           size="29">
+                    <a:ajax event="blur" render="valorTotalField" bypassUpdates="true"/>
+                </h:inputText>
+            </s:decorate>
+
+            <s:decorate id="estadoConservacionField" template="layout/edit.xhtml">
+                <ui:define name="label">Estado conservacion</ui:define>
+                <h:inputTextarea id="estadoConservacion"
+                               cols="80"
+                               rows="6"
+                           disabled="#{mueblesHome.managed}"
+                              value="#{mueblesHome.instance.id.estadoConservacion}"/>
+            </s:decorate>
+
+            <s:decorate id="diferenciaField" template="layout/edit.xhtml">
+                <ui:define name="label">Diferencia</ui:define>
+                <h:inputTextarea id="diferencia"
+                               cols="80"
+                               rows="6"
+                           disabled="#{mueblesHome.managed}"
+                              value="#{mueblesHome.instance.id.diferencia}"/>
+            </s:decorate>
+
+            <s:decorate id="barrasField" template="layout/edit.xhtml">
+                <ui:define name="label">Barras</ui:define>
+                <h:inputTextarea id="barras"
+                               cols="80"
+                               rows="6"
+                           disabled="#{mueblesHome.managed}"
+                              value="#{mueblesHome.instance.id.barras}"/>
+            </s:decorate>
+
+            <s:decorate id="departamentoField" template="layout/edit.xhtml">
+                <ui:define name="label">Departamento</ui:define>
+                <h:inputText id="departamento"
+                       disabled="#{mueblesHome.managed}"
+                          size="100"
+                     maxlength="100"
+                         value="#{mueblesHome.instance.id.departamento}">
+                    <a:ajax event="blur" render="departamentoField" bypassUpdates="true"/>
+                </h:inputText>
+            </s:decorate>
+
+            <div style="clear:both">
+                <span class="required">*</span>
+                required fields
+            </div>
+
+        </rich:panel>
+
+        <div class="actionButtons">
+
+            <h:commandButton id="save"
+                          value="Save"
+                         action="#{mueblesHome.persist}"
+                       disabled="#{!mueblesHome.wired}"
+                       rendered="#{!mueblesHome.managed}">
+                <s:conversationId/>
+            </h:commandButton>
+
+            <h:commandButton id="update"
+                          value="Save"
+                         action="#{mueblesHome.update}"
+                       rendered="#{mueblesHome.managed}">
+                <s:conversationId/>
+            </h:commandButton>
+
+            <h:commandButton id="delete"
+                          value="Delete"
+                         action="#{mueblesHome.remove}"
+                      immediate="true"
+                       rendered="#{mueblesHome.managed}"/>
+
+            <s:button id="cancelEdit"
+                   value="Cancel"
+             propagation="end"
+                    view="/Muebles.xhtml"
+                rendered="#{mueblesHome.managed}"/>
+
+            <s:button id="cancelAdd"
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty mueblesFrom ? 'MueblesList' : mueblesFrom}.xhtml"
+                rendered="#{!mueblesHome.managed}"/>
+
+        </div>
+    </h:form>
+
+</ui:define>
+
+</ui:composition>

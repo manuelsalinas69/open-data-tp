@@ -1,0 +1,117 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.org/schema/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Muebles Details</f:facet>
+
+        <s:decorate id="unidadJerarquica" template="layout/display.xhtml">
+            <ui:define name="label">Unidad jerarquica</ui:define>
+            <h:outputText value="#{mueblesHome.instance.id.unidadJerarquica}"/>
+        </s:decorate>
+        <s:decorate id="codigoReparticion" template="layout/display.xhtml">
+            <ui:define name="label">Codigo reparticion</ui:define>
+            <h:outputText value="#{mueblesHome.instance.id.codigoReparticion}"/>
+        </s:decorate>
+        <s:decorate id="nombreReparticion" template="layout/display.xhtml">
+            <ui:define name="label">Nombre reparticion</ui:define>
+            <h:outputText value="#{mueblesHome.instance.id.nombreReparticion}"/>
+        </s:decorate>
+        <s:decorate id="codigoDependencia" template="layout/display.xhtml">
+            <ui:define name="label">Codigo dependencia</ui:define>
+            <h:outputText value="#{mueblesHome.instance.id.codigoDependencia}"/>
+        </s:decorate>
+        <s:decorate id="nombreDependencia" template="layout/display.xhtml">
+            <ui:define name="label">Nombre dependencia</ui:define>
+            <h:outputText value="#{mueblesHome.instance.id.nombreDependencia}"/>
+        </s:decorate>
+        <s:decorate id="area" template="layout/display.xhtml">
+            <ui:define name="label">Area</ui:define>
+            <h:outputText value="#{mueblesHome.instance.id.area}"/>
+        </s:decorate>
+        <s:decorate id="cuenta" template="layout/display.xhtml">
+            <ui:define name="label">Cuenta</ui:define>
+            <h:outputText value="#{mueblesHome.instance.id.cuenta}"/>
+        </s:decorate>
+        <s:decorate id="subcuenta" template="layout/display.xhtml">
+            <ui:define name="label">Subcuenta</ui:define>
+            <h:outputText value="#{mueblesHome.instance.id.subcuenta}"/>
+        </s:decorate>
+        <s:decorate id="especificacion" template="layout/display.xhtml">
+            <ui:define name="label">Especificacion</ui:define>
+            <h:outputText value="#{mueblesHome.instance.id.especificacion}"/>
+        </s:decorate>
+        <s:decorate id="descripcion" template="layout/display.xhtml">
+            <ui:define name="label">Descripcion</ui:define>
+            <h:outputText value="#{mueblesHome.instance.id.descripcion}"/>
+        </s:decorate>
+        <s:decorate id="fechaAdquisicion" template="layout/display.xhtml">
+            <ui:define name="label">Fecha adquisicion</ui:define>
+            <h:outputText value="#{mueblesHome.instance.id.fechaAdquisicion}"/>
+        </s:decorate>
+        <s:decorate id="rotulado" template="layout/display.xhtml">
+            <ui:define name="label">Rotulado</ui:define>
+            <h:outputText value="#{mueblesHome.instance.id.rotulado}"/>
+        </s:decorate>
+        <s:decorate id="cantidad" template="layout/display.xhtml">
+            <ui:define name="label">Cantidad</ui:define>
+            <h:outputText value="#{mueblesHome.instance.id.cantidad}">
+                <f:convertNumber/>
+            </h:outputText>
+        </s:decorate>
+        <s:decorate id="valorUnitario" template="layout/display.xhtml">
+            <ui:define name="label">Valor unitario</ui:define>
+            <h:outputText value="#{mueblesHome.instance.id.valorUnitario}">
+                <f:convertNumber/>
+            </h:outputText>
+        </s:decorate>
+        <s:decorate id="valorTotal" template="layout/display.xhtml">
+            <ui:define name="label">Valor total</ui:define>
+            <h:outputText value="#{mueblesHome.instance.id.valorTotal}">
+                <f:convertNumber/>
+            </h:outputText>
+        </s:decorate>
+        <s:decorate id="estadoConservacion" template="layout/display.xhtml">
+            <ui:define name="label">Estado conservacion</ui:define>
+            <h:outputText value="#{mueblesHome.instance.id.estadoConservacion}"/>
+        </s:decorate>
+        <s:decorate id="diferencia" template="layout/display.xhtml">
+            <ui:define name="label">Diferencia</ui:define>
+            <h:outputText value="#{mueblesHome.instance.id.diferencia}"/>
+        </s:decorate>
+        <s:decorate id="barras" template="layout/display.xhtml">
+            <ui:define name="label">Barras</ui:define>
+            <h:outputText value="#{mueblesHome.instance.id.barras}"/>
+        </s:decorate>
+        <s:decorate id="departamento" template="layout/display.xhtml">
+            <ui:define name="label">Departamento</ui:define>
+            <h:outputText value="#{mueblesHome.instance.id.departamento}"/>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/MueblesEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/#{empty mueblesFrom ? 'MueblesList' : mueblesFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+</ui:define>
+
+</ui:composition>

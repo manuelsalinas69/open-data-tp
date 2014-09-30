@@ -1,0 +1,16 @@
+action.package=py.com.pol.opendatagui.session
+action.sources=/OpenDataGui-ejb/ejbModule
+eclipse.preferences.version=1
+model.package=py.com.pol.opendatagui.entity
+model.sources=/OpenDataGui-ejb/ejbModule
+seam.ear.project=OpenDataGui-ear
+seam.ejb.project=OpenDataGui-ejb
+seam.project.connection.profile=open_data
+seam.project.deployment.type=ear
+seam.project.settings.version=1.1
+seam.project.web.root.folder=/OpenDataGui/WebContent
+seam.runtime.name=jboss-seam-2.3.1.Final
+seam.test.creating=false
+seam.test.project=OpenDataGui-test
+test.package=org.domain.opendatagui.test
+test.sources=/OpenDataGui-test/test-src

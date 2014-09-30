@@ -1,0 +1,130 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a="http://richfaces.org/a4j" template="layout/template.xhtml">
+
+	<ui:define name="body">
+		<s:decorate template="/layout/title.xhtml">
+			<ui:define name="label">
+				Visualizaciones
+			</ui:define>
+		</s:decorate>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jquery.jqplot.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.barRenderer.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.pieRenderer.min.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.categoryAxisRenderer.min.js"></script>
+
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.canvasTextRenderer.min.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.canvasAxisTickRenderer.min.js"></script>
+
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.dateAxisRenderer.min.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.pointLabels.min.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/utils/jplotUtil.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.cursor.min.js"></script>
+		<link rel="stylesheet" type="text/css"
+			href="#{facesContext.externalContext.requestContextPath}/styles/jplot/jquery.jqplot.css" />
+		<h:form>
+			
+				<h:panelGrid>
+					<rich:tabPanel switchType="client">
+						<rich:tab header="Cantidad">
+							<rich:panel styleClass="tabContent">
+								<h:panelGrid>
+									<a:commandButton value="Ver Datos" action="#{graficosManager.reportCantidadPorDepartamento()}"
+										data="#{graficosManager.jsonData}"
+										oncomplete="plotBarReport('#cantidadPorDepartamento','Cantidad por departamento',event.data);"
+									/>
+									<div id="cantidadPorDepartamento" style=" width: 1000px;"/>
+								</h:panelGrid>
+							</rich:panel>
+						</rich:tab>
+						<rich:tab header="Estados de Conservacion">
+							<rich:panel styleClass="tabContent">
+								
+								
+								<rich:tabPanel switchType="client">
+								
+									
+									<rich:tab header="General">
+										<h:panelGrid>
+											<a:commandButton value="Ver Datos" action="#{graficosManager.reportEstadoGeneral()}" execute="@this"
+												data="#{graficosManager.jsonData}" 
+												oncomplete="plotBarReport('#estadoGeneral','Estado de Conservacion General',event.data);"
+											/>
+											<div id="estadoGeneral" style="width: 1000px"/>
+										</h:panelGrid>
+									</rich:tab>
+									<rich:tab header="Por Departamento">
+										<h:panelGrid>
+											<h:panelGrid columns="2">
+												<s:decorate template="/layout/edit.xhtml">
+													<ui:define name="label">
+														Departamento
+													</ui:define>
+													<h:selectOneMenu value="#{graficosManager.departamento}" >
+														<f:selectItems value="#{departamentoSelectItems}"/>
+														<a:ajax event="blur" execute="@this"/>
+													</h:selectOneMenu>
+												</s:decorate>
+												<a:commandButton value="Ver datos" action="#{graficosManager.reportEstadoPorDepartamento()}" data="#{graficosManager.jsonData}"
+													execute="@form"
+													oncomplete="plotBarReport('#estadoPorDepartamento','Estado de Conservacion por Departamento',event.data);"
+												/>
+											</h:panelGrid>
+											<div id="estadoPorDepartamento" style="width: 1000px"/>
+										
+										</h:panelGrid>
+									</rich:tab>
+									<rich:tab header="Por Estado de Conservacion">
+										<rich:panel styleClass="tabContent">
+											<h:panelGrid>
+												<h:panelGrid columns="2">
+												<s:decorate template="/layout/edit.xhtml">
+													<ui:define name="label">
+														Estado
+													</ui:define>
+													<h:selectOneMenu value="#{graficosManager.estadoConservacion}" >
+														<f:selectItems value="#{estadoConservacionSelectItems}"/>
+														<a:ajax event="blur" execute="@this"/>
+													</h:selectOneMenu>
+												</s:decorate>
+													<a:commandButton value="Ver datos" action="#{graficosManager.reportEstadoPorDepartamentoEstado()}" data="#{graficosManager.jsonData}"
+														execute="@form"
+														oncomplete="plotBarReport('#estadoPorDepartmentoEstado','Estado Seleccionado por Departamento',event.data);"
+													/>
+												</h:panelGrid>
+												<div id="estadoPorDepartmentoEstado" style="width: 1000px;"/>
+											</h:panelGrid>
+										</rich:panel>
+									</rich:tab>
+								</rich:tabPanel>
+								
+								
+							
+							</rich:panel>
+						
+						</rich:tab>
+						
+					</rich:tabPanel>
+					
+				</h:panelGrid>
+			
+		</h:form>
+	</ui:define>
+
+</ui:composition>

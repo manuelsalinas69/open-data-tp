@@ -1,0 +1,371 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.org/schema/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="mueblesSearch" styleClass="edit">
+
+        <rich:collapsiblePanel header="Filtros de busqueda" switchType="client">
+
+            <h:panelGrid columns="2">
+				 <s:decorate template="layout/display.xhtml">
+					<ui:define name="label">Departamento</ui:define>
+					<h:selectOneMenu id="departamento" value="#{mueblesList.muebles.id.departamento}">
+						<f:selectItems value="#{departamentoSelectItems}"/>
+					</h:selectOneMenu>
+				</s:decorate>
+				
+				<s:decorate template="layout/display.xhtml">
+					<ui:define name="label">Unidad jerarquica</ui:define>
+					<h:inputText id="unidadJerarquica" value="#{mueblesList.muebles.id.unidadJerarquica}"/>
+				</s:decorate>
+
+				<s:decorate template="layout/display.xhtml">
+					<ui:define name="label">Codigo reparticion</ui:define>
+					<h:inputText id="codigoReparticion" value="#{mueblesList.muebles.id.codigoReparticion}"/>
+				</s:decorate>
+
+				<s:decorate template="layout/display.xhtml">
+					<ui:define name="label">Nombre reparticion</ui:define>
+					<h:inputText id="nombreReparticion" value="#{mueblesList.muebles.id.nombreReparticion}"/>
+				</s:decorate>
+
+				<s:decorate template="layout/display.xhtml">
+					<ui:define name="label">Codigo dependencia</ui:define>
+					<h:inputText id="codigoDependencia" value="#{mueblesList.muebles.id.codigoDependencia}"/>
+				</s:decorate>
+
+				<s:decorate template="layout/display.xhtml">
+					<ui:define name="label">Nombre dependencia</ui:define>
+					<h:inputText id="nombreDependencia" value="#{mueblesList.muebles.id.nombreDependencia}"/>
+				</s:decorate>
+
+				<s:decorate template="layout/display.xhtml">
+					<ui:define name="label">Area</ui:define>
+					<h:inputText id="area" value="#{mueblesList.muebles.id.area}"/>
+				</s:decorate>
+
+				<s:decorate template="layout/display.xhtml">
+					<ui:define name="label">Cuenta</ui:define>
+					<h:inputText id="cuenta" value="#{mueblesList.muebles.id.cuenta}"/>
+				</s:decorate>
+
+				<s:decorate template="layout/display.xhtml">
+					<ui:define name="label">Subcuenta</ui:define>
+					<h:inputText id="subcuenta" value="#{mueblesList.muebles.id.subcuenta}"/>
+				</s:decorate>
+
+				<s:decorate template="layout/display.xhtml">
+					<ui:define name="label">Especificacion</ui:define>
+					<h:inputText id="especificacion" value="#{mueblesList.muebles.id.especificacion}"/>
+				</s:decorate>
+
+				<s:decorate template="layout/display.xhtml">
+					<ui:define name="label">Descripcion</ui:define>
+					<h:inputText id="descripcion" value="#{mueblesList.muebles.id.descripcion}"/>
+				</s:decorate>
+
+				
+
+				<s:decorate template="layout/display.xhtml">
+					<ui:define name="label">Rotulado</ui:define>
+					<h:inputText id="rotulado" value="#{mueblesList.muebles.id.rotulado}"/>
+				</s:decorate>
+
+				<s:decorate template="layout/display.xhtml">
+					<ui:define name="label">Estado conservacion</ui:define>
+					<h:selectOneMenu id="estadoConservacion" value="#{mueblesList.muebles.id.estadoConservacion}">
+						<f:selectItems value="#{estadoConservacionSelectItems}"/>
+					</h:selectOneMenu>
+				</s:decorate>
+
+				<s:decorate template="layout/display.xhtml">
+					<ui:define name="label">Diferencia</ui:define>
+					<h:inputText id="diferencia" value="#{mueblesList.muebles.id.diferencia}"/>
+				</s:decorate>
+
+				<s:decorate template="layout/display.xhtml">
+					<ui:define name="label">Barras</ui:define>
+					<h:inputText id="barras" value="#{mueblesList.muebles.id.barras}"/>
+				</s:decorate>
+
+			
+            </h:panelGrid>
+			<h:panelGrid>
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Coincidir</ui:define>
+                <h:selectOneRadio id="logic" value="#{mueblesList.restrictionLogicOperator}" styleClass="radio defaultText">
+                    <f:selectItem itemLabel="Todos" itemValue="and"/>
+                    <f:selectItem itemLabel="Cualquiera" itemValue="or"/>
+                </h:selectOneRadio>
+            </s:decorate></h:panelGrid>
+
+        </rich:collapsiblePanel>
+
+        <div class="actionButtons">
+            <h:commandButton id="search" value="Search" action="/MueblesList.xhtml"/>
+            <s:button id="reset" value="Reset" includePageParams="false"/>
+        </div>
+
+    </h:form>
+
+    <rich:panel>
+        <f:facet name="header">Resultado de la busqueda (#{empty mueblesList.resultList ? 0 : (mueblesList.paginated ? mueblesList.resultCount : mueblesList.resultList.size)})</f:facet>
+    <div class="results" id="mueblesList">
+
+    <h:outputText value="La busqueda no ha retornado resultados."
+               rendered="#{empty mueblesList.resultList}"/>
+
+    <rich:dataTable id="mueblesList"
+                var="_muebles"
+              value="#{mueblesList.resultList}"
+           rendered="#{not empty mueblesList.resultList}">
+          <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{mueblesList}"/>
+                    <ui:param name="propertyLabel" value="Departamento"/>
+                    <ui:param name="propertyPath" value="muebles.id.departamento"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_muebles.id.departamento}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{mueblesList}"/>
+                    <ui:param name="propertyLabel" value="Unidad jerarquica"/>
+                    <ui:param name="propertyPath" value="muebles.id.unidadJerarquica"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_muebles.id.unidadJerarquica}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{mueblesList}"/>
+                    <ui:param name="propertyLabel" value="Codigo reparticion"/>
+                    <ui:param name="propertyPath" value="muebles.id.codigoReparticion"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_muebles.id.codigoReparticion}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{mueblesList}"/>
+                    <ui:param name="propertyLabel" value="Nombre reparticion"/>
+                    <ui:param name="propertyPath" value="muebles.id.nombreReparticion"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_muebles.id.nombreReparticion}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{mueblesList}"/>
+                    <ui:param name="propertyLabel" value="Codigo dependencia"/>
+                    <ui:param name="propertyPath" value="muebles.id.codigoDependencia"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_muebles.id.codigoDependencia}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{mueblesList}"/>
+                    <ui:param name="propertyLabel" value="Nombre dependencia"/>
+                    <ui:param name="propertyPath" value="muebles.id.nombreDependencia"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_muebles.id.nombreDependencia}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{mueblesList}"/>
+                    <ui:param name="propertyLabel" value="Area"/>
+                    <ui:param name="propertyPath" value="muebles.id.area"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_muebles.id.area}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{mueblesList}"/>
+                    <ui:param name="propertyLabel" value="Cuenta"/>
+                    <ui:param name="propertyPath" value="muebles.id.cuenta"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_muebles.id.cuenta}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{mueblesList}"/>
+                    <ui:param name="propertyLabel" value="Subcuenta"/>
+                    <ui:param name="propertyPath" value="muebles.id.subcuenta"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_muebles.id.subcuenta}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{mueblesList}"/>
+                    <ui:param name="propertyLabel" value="Especificacion"/>
+                    <ui:param name="propertyPath" value="muebles.id.especificacion"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_muebles.id.especificacion}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{mueblesList}"/>
+                    <ui:param name="propertyLabel" value="Descripcion"/>
+                    <ui:param name="propertyPath" value="muebles.id.descripcion"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_muebles.id.descripcion}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{mueblesList}"/>
+                    <ui:param name="propertyLabel" value="Fecha adquisicion"/>
+                    <ui:param name="propertyPath" value="muebles.id.fechaAdquisicion"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_muebles.id.fechaAdquisicion}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{mueblesList}"/>
+                    <ui:param name="propertyLabel" value="Rotulado"/>
+                    <ui:param name="propertyPath" value="muebles.id.rotulado"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_muebles.id.rotulado}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{mueblesList}"/>
+                    <ui:param name="propertyLabel" value="Cantidad"/>
+                    <ui:param name="propertyPath" value="muebles.id.cantidad"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_muebles.id.cantidad}">
+                <f:convertNumber/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{mueblesList}"/>
+                    <ui:param name="propertyLabel" value="Valor unitario"/>
+                    <ui:param name="propertyPath" value="muebles.id.valorUnitario"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_muebles.id.valorUnitario}">
+                <f:convertNumber/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{mueblesList}"/>
+                    <ui:param name="propertyLabel" value="Valor total"/>
+                    <ui:param name="propertyPath" value="muebles.id.valorTotal"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_muebles.id.valorTotal}">
+                <f:convertNumber/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{mueblesList}"/>
+                    <ui:param name="propertyLabel" value="Estado conservacion"/>
+                    <ui:param name="propertyPath" value="muebles.id.estadoConservacion"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_muebles.id.estadoConservacion}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{mueblesList}"/>
+                    <ui:param name="propertyLabel" value="Diferencia"/>
+                    <ui:param name="propertyPath" value="muebles.id.diferencia"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_muebles.id.diferencia}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{mueblesList}"/>
+                    <ui:param name="propertyLabel" value="Barras"/>
+                    <ui:param name="propertyPath" value="muebles.id.barras"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_muebles.id.barras}"/>
+        </h:column>
+       
+       
+    </rich:dataTable>
+
+    </div>
+    </rich:panel>
+
+    <div class="tableControl">
+
+        <s:link view="/MueblesList.xhtml"
+            rendered="#{mueblesList.previousExists}"
+               value="#{messages.left}#{messages.left} Primera pagina"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+
+        <s:link view="/MueblesList.xhtml"
+            rendered="#{mueblesList.previousExists}"
+               value="#{messages.left} Pagina previa"
+                  id="previousPage">
+            <f:param name="firstResult"
+                    value="#{mueblesList.previousFirstResult}"/>
+        </s:link>
+
+        <s:link view="/MueblesList.xhtml"
+            rendered="#{mueblesList.nextExists}"
+               value="Pagina siguiente #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult"
+                    value="#{mueblesList.nextFirstResult}"/>
+        </s:link>
+
+        <s:link view="/MueblesList.xhtml"
+            rendered="#{mueblesList.nextExists}"
+               value="Ultima pagina #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult"
+                    value="#{mueblesList.lastFirstResult}"/>
+        </s:link>
+
+    </div>
+
+
+</ui:define>
+
+</ui:composition>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources xmlns="http://www.jboss.org/ironjacamar/schema">
+    <datasource 
+        jndi-name="OpenDataGuiDatasource"
+        enabled="true" 
+        use-java-context="true" pool-name="OpenDataGuiDatasource_pool">
+        <connection-url>jdbc:postgresql://localhost:5432/opendata</connection-url>
+        <driver>postgresql-8.4-702.jdbc4.jar</driver>
+        <security>
+		      <user-name>postgres</user-name>
+		      <password>postgres</password>
+        </security>
+    </datasource>
+</datasources>

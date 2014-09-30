@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.org/schema/seam/pages"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://jboss.org/schema/seam/pages http://jboss.org/schema/seam/pages-2.3.xsd">
+
+   <param name="firstResult" value="#{mueblesList.firstResult}"/>
+   <param name="sort" value="#{mueblesList.orderColumn}"/>
+   <param name="dir" value="#{mueblesList.orderDirection}"/>
+   <param name="logic" value="#{mueblesList.restrictionLogicOperator}"/>
+
+   <param name="from"/>
+   <param name="unidadJerarquica" value="#{mueblesList.muebles.id.unidadJerarquica}"/>
+   <param name="codigoReparticion" value="#{mueblesList.muebles.id.codigoReparticion}"/>
+   <param name="nombreReparticion" value="#{mueblesList.muebles.id.nombreReparticion}"/>
+   <param name="codigoDependencia" value="#{mueblesList.muebles.id.codigoDependencia}"/>
+   <param name="nombreDependencia" value="#{mueblesList.muebles.id.nombreDependencia}"/>
+   <param name="area" value="#{mueblesList.muebles.id.area}"/>
+   <param name="cuenta" value="#{mueblesList.muebles.id.cuenta}"/>
+   <param name="subcuenta" value="#{mueblesList.muebles.id.subcuenta}"/>
+   <param name="especificacion" value="#{mueblesList.muebles.id.especificacion}"/>
+   <param name="descripcion" value="#{mueblesList.muebles.id.descripcion}"/>
+   <param name="fechaAdquisicion" value="#{mueblesList.muebles.id.fechaAdquisicion}"/>
+   <param name="rotulado" value="#{mueblesList.muebles.id.rotulado}"/>
+   <param name="estadoConservacion" value="#{mueblesList.muebles.id.estadoConservacion}"/>
+   <param name="diferencia" value="#{mueblesList.muebles.id.diferencia}"/>
+   <param name="barras" value="#{mueblesList.muebles.id.barras}"/>
+   <param name="departamento" value="#{mueblesList.muebles.id.departamento}"/>
+
+</page>
