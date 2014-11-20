@@ -1,0 +1,16 @@
+action.package=py.com.pol.sas.opendata.session
+action.sources=/SasOpenData-ejb/ejbModule
+eclipse.preferences.version=1
+model.package=py.com.pol.sas.opendata.entity
+model.sources=/SasOpenData-ejb/ejbModule
+seam.ear.project=SasOpenData-ear
+seam.ejb.project=SasOpenData-ejb
+seam.project.connection.profile=SAS
+seam.project.deployment.type=ear
+seam.project.settings.version=1.1
+seam.project.web.root.folder=/SasOpenData/WebContent
+seam.runtime.name=jboss-seam-2.3.1.Final
+seam.test.creating=false
+seam.test.project=SasOpenData-test
+test.package=org.domain.sasopendata.test
+test.sources=/SasOpenData-test/test-src

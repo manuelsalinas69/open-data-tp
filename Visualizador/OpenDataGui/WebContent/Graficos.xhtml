@@ -11,7 +11,7 @@
 	<ui:define name="body">
 		<s:decorate template="/layout/title.xhtml">
 			<ui:define name="label">
-				Visualizaciones
+				Visualizaciones de montos utilizados en muebles del MEC
 			</ui:define>
 		</s:decorate>
 		<script type="text/javascript"
@@ -36,94 +36,124 @@
 			src="#{facesContext.externalContext.requestContextPath}/javascript/utils/jplotUtil.js"></script>
 		<script type="text/javascript"
 			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.cursor.min.js"></script>
+
+		<script type="text/javascript">
+		$(document).ready(function(){
+			load1();load2();/*load3();*/load4();load5();load6(),load7();load8();
+		});
+		</script>
 		<link rel="stylesheet" type="text/css"
 			href="#{facesContext.externalContext.requestContextPath}/styles/jplot/jquery.jqplot.css" />
 		<h:form>
-			
+			<!-- Functions -->
+			<a:jsFunction name="load1"
+				action="#{graficosManager.reportMontosPorDepartamento()}"
+				data="#{graficosManager.jsonData}" execute="@this"
+				oncomplete="plotBarReport('#montoPorDepartamento','Montos por departamento',event.data);" />
+			<a:jsFunction name="load2"
+				action="#{graficosManager.reportMontosPorDepartamento()}"
+				data="#{graficosManager.jsonData}" execute="@this"
+				oncomplete="plotPieReport('#montoPorDepartamentoPercent','Porcentajes por departamento',event.data);" />
+
+			<a:jsFunction name="load4"
+				action="#{graficosManager.reportEstadoGeneral()}" execute="@this"
+				data="#{graficosManager.jsonData}"
+				oncomplete="plotBarReport('#estadoGeneral','Estado de Conservacion General',event.data);" />
+			<a:jsFunction name="load5"
+				action="#{graficosManager.reportEstadoPorDepartamento()}"
+				data="#{graficosManager.jsonData}" execute="@this"
+				oncomplete="plotBarReport('#estadoPorDepartamento','Estado de Conservacion por Departamento',event.data);" />
+			<a:jsFunction name="load6"
+				action="#{graficosManager.reportEstadoPorDepartamento()}"
+				data="#{graficosManager.jsonData}" execute="@this"
+				oncomplete="plotBarReport('#estadoPorDepartamento','Estado de Conservacion por Departamento',event.data);" />
+			<a:jsFunction name="load7"
+				action="#{graficosManager.reportEstadoPorDepartamentoEstado()}"
+				data="#{graficosManager.jsonData}" execute="@this"
+				oncomplete="plotBarReport('#estadoPorDepartmentoEstado','Estado Seleccionado por Departamento',event.data);" />
+			<a:jsFunction name="load8"
+				action="#{graficosManager.reportEstadoPorDepartamentoEstado()}"
+				data="#{graficosManager.jsonData}" execute="@this"
+				oncomplete="plotPieReport('#estadoPorDepartmentoEstadoPercent','Estado Seleccionado por Departamento',event.data);" />
+
+			<h:panelGrid>
+				<div>Todos los montos se encuentran en millones de guaranies.</div>
 				<h:panelGrid>
-					<rich:tabPanel switchType="client">
-						<rich:tab header="Cantidad">
-							<rich:panel styleClass="tabContent">
-								<h:panelGrid>
-									<a:commandButton value="Ver Datos" action="#{graficosManager.reportCantidadPorDepartamento()}"
-										data="#{graficosManager.jsonData}"
-										oncomplete="plotBarReport('#cantidadPorDepartamento','Cantidad por departamento',event.data);"
-									/>
-									<div id="cantidadPorDepartamento" style=" width: 1000px;"/>
-								</h:panelGrid>
-							</rich:panel>
-						</rich:tab>
-						<rich:tab header="Estados de Conservacion">
-							<rich:panel styleClass="tabContent">
-								
-								
-								<rich:tabPanel switchType="client">
-								
-									
-									<rich:tab header="General">
-										<h:panelGrid>
-											<a:commandButton value="Ver Datos" action="#{graficosManager.reportEstadoGeneral()}" execute="@this"
-												data="#{graficosManager.jsonData}" 
-												oncomplete="plotBarReport('#estadoGeneral','Estado de Conservacion General',event.data);"
-											/>
-											<div id="estadoGeneral" style="width: 1000px"/>
-										</h:panelGrid>
-									</rich:tab>
-									<rich:tab header="Por Departamento">
-										<h:panelGrid>
-											<h:panelGrid columns="2">
-												<s:decorate template="/layout/edit.xhtml">
-													<ui:define name="label">
-														Departamento
-													</ui:define>
-													<h:selectOneMenu value="#{graficosManager.departamento}" >
-														<f:selectItems value="#{departamentoSelectItems}"/>
-														<a:ajax event="blur" execute="@this"/>
-													</h:selectOneMenu>
-												</s:decorate>
-												<a:commandButton value="Ver datos" action="#{graficosManager.reportEstadoPorDepartamento()}" data="#{graficosManager.jsonData}"
-													execute="@form"
-													oncomplete="plotBarReport('#estadoPorDepartamento','Estado de Conservacion por Departamento',event.data);"
-												/>
-											</h:panelGrid>
-											<div id="estadoPorDepartamento" style="width: 1000px"/>
-										
-										</h:panelGrid>
-									</rich:tab>
-									<rich:tab header="Por Estado de Conservacion">
-										<rich:panel styleClass="tabContent">
-											<h:panelGrid>
-												<h:panelGrid columns="2">
-												<s:decorate template="/layout/edit.xhtml">
-													<ui:define name="label">
+
+					<h3>Resumen General de Montos Utilizados por departamentos</h3>
+					<div id="montoPorDepartamento" style="width: 1000px;" />
+					<h3>En porcentaje</h3>
+					<div id="montoPorDepartamentoPercent" style="width: 1000px;" />
+
+				</h:panelGrid>
+
+
+
+
+
+
+
+
+
+
+				<h:panelGrid>
+
+					<h3>Montos agrupados por estados de conservacion de los
+						muebles en todos los departamentos</h3>
+
+					<div id="estadoGeneral" style="width: 1000px" />
+
+					<h3>Montos por Estados de Conservacion de los muebles en el
+						departamento seleccionado</h3>
+
+
+					<s:decorate template="/layout/edit.xhtml">
+						<ui:define name="label">
+															Departamento
+														</ui:define>
+						<h:selectOneMenu value="#{graficosManager.departamento}">
+							<f:selectItems value="#{departamentoSelectItems}" />
+							<a:ajax event="change" execute="@this"
+								oncomplete="load5(); load6();" />
+						</h:selectOneMenu>
+					</s:decorate>
+
+
+
+
+					<div id="estadoPorDepartamento" style="width: 1000px" />
+
+					<div id="estadoPorDepartamentoPercent" style="width: 1000px" />
+
+				</h:panelGrid>
+
+
+
+
+				<h:panelGrid>
+					<h3>Montos agrupados por departamento por el estado de
+						conservacion seleccionado</h3>
+					<s:decorate template="/layout/edit.xhtml">
+						<ui:define name="label">
 														Estado
 													</ui:define>
-													<h:selectOneMenu value="#{graficosManager.estadoConservacion}" >
-														<f:selectItems value="#{estadoConservacionSelectItems}"/>
-														<a:ajax event="blur" execute="@this"/>
-													</h:selectOneMenu>
-												</s:decorate>
-													<a:commandButton value="Ver datos" action="#{graficosManager.reportEstadoPorDepartamentoEstado()}" data="#{graficosManager.jsonData}"
-														execute="@form"
-														oncomplete="plotBarReport('#estadoPorDepartmentoEstado','Estado Seleccionado por Departamento',event.data);"
-													/>
-												</h:panelGrid>
-												<div id="estadoPorDepartmentoEstado" style="width: 1000px;"/>
-											</h:panelGrid>
-										</rich:panel>
-									</rich:tab>
-								</rich:tabPanel>
-								
-								
-							
-							</rich:panel>
-						
-						</rich:tab>
-						
-					</rich:tabPanel>
-					
+						<h:selectOneMenu value="#{graficosManager.estadoConservacion}">
+							<f:selectItems value="#{estadoConservacionSelectItems}" />
+							<a:ajax event="change" execute="@this"
+								oncomplete="load7();load8();" />
+						</h:selectOneMenu>
+					</s:decorate>
+
+
+
+					<div id="estadoPorDepartmentoEstado" style="width: 1000px;" />
+					<h3>En Porcentaje</h3>
+					<div id="estadoPorDepartmentoEstadoPercent" style="width: 1000px;" />
+
+
+
 				</h:panelGrid>
-			
+			</h:panelGrid>
 		</h:form>
 	</ui:define>
 

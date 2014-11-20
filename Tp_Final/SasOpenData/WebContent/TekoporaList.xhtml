@@ -1,0 +1,157 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.org/schema/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="tekoporaSearch" styleClass="edit">
+
+        <rich:collapsiblePanel header="Filtros de Busqueda" switchType="client" title="Haga click aqui para visualizar los filtros de busqueda" expanded="false">
+
+            <h:panelGrid columns="2">
+				<s:decorate template="layout/display.xhtml">
+					<ui:define name="label">Nro cedula</ui:define>
+					<h:inputText id="nroCedula" value="#{tekoporaList.tekopora.nroCedula}"/>
+				</s:decorate>
+
+				<s:decorate template="layout/display.xhtml">
+					<ui:define name="label">Nombre</ui:define>
+					<h:inputText id="nombre" value="#{tekoporaList.tekopora.nombre}"/>
+				</s:decorate>
+
+				<s:decorate template="layout/display.xhtml">
+					<ui:define name="label">Departamento</ui:define>
+					<h:inputText id="departamento" value="#{tekoporaList.tekopora.departamento}"/>
+				</s:decorate>
+
+				<s:decorate template="layout/display.xhtml">
+					<ui:define name="label">Distrito</ui:define>
+					<h:inputText id="distrito" value="#{tekoporaList.tekopora.distrito}"/>
+				</s:decorate>
+            </h:panelGrid>
+
+           
+
+        </rich:collapsiblePanel>
+
+        <div class="actionButtons">
+            <h:commandButton id="search" value="Buscar" action="/TekoporaList.xhtml"/>
+            <s:button id="reset" value="Todos" includePageParams="false"/>
+        </div>
+
+    </h:form>
+
+    <rich:panel>
+        <f:facet name="header">Resultados de la busqueda (#{empty tekoporaList.resultList ? 0 : (tekoporaList.paginated ? tekoporaList.resultCount : tekoporaList.resultList.size)})</f:facet>
+    <div class="results" id="tekoporaList">
+
+    <h:outputText value="La busqueda no ha retornado resultados."
+               rendered="#{empty tekoporaList.resultList}"/>
+
+    <rich:dataTable id="tekoporaList"
+                var="_tekopora"
+              value="#{tekoporaList.resultList}"
+           rendered="#{not empty tekoporaList.resultList}">
+       
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tekoporaList}"/>
+                    <ui:param name="propertyLabel" value="Nro cedula"/>
+                    <ui:param name="propertyPath" value="tekopora.nroCedula"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tekopora.nroCedula}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tekoporaList}"/>
+                    <ui:param name="propertyLabel" value="Nombre"/>
+                    <ui:param name="propertyPath" value="tekopora.nombre"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tekopora.nombre}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tekoporaList}"/>
+                    <ui:param name="propertyLabel" value="Departamento"/>
+                    <ui:param name="propertyPath" value="tekopora.departamento"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tekopora.departamento}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tekoporaList}"/>
+                    <ui:param name="propertyLabel" value="Distrito"/>
+                    <ui:param name="propertyPath" value="tekopora.distrito"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tekopora.distrito}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tekoporaList}"/>
+                    <ui:param name="propertyLabel" value="Importe mensual"/>
+                    <ui:param name="propertyPath" value="tekopora.importeMensual"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tekopora.importeMensual}"/>
+        </h:column>
+       
+    </rich:dataTable>
+
+    </div>
+    </rich:panel>
+
+    <div class="tableControl">
+
+        <s:link view="/TekoporaList.xhtml"
+            rendered="#{tekoporaList.previousExists}"
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+
+        <s:link view="/TekoporaList.xhtml"
+            rendered="#{tekoporaList.previousExists}"
+               value="#{messages.left} Previous Page"
+                  id="previousPage">
+            <f:param name="firstResult"
+                    value="#{tekoporaList.previousFirstResult}"/>
+        </s:link>
+
+        <s:link view="/TekoporaList.xhtml"
+            rendered="#{tekoporaList.nextExists}"
+               value="Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult"
+                    value="#{tekoporaList.nextFirstResult}"/>
+        </s:link>
+
+        <s:link view="/TekoporaList.xhtml"
+            rendered="#{tekoporaList.nextExists}"
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult"
+                    value="#{tekoporaList.lastFirstResult}"/>
+        </s:link>
+
+    </div>
+
+  
+
+</ui:define>
+
+</ui:composition>

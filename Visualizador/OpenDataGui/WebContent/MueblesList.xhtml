@@ -12,7 +12,7 @@
 
     <h:form id="mueblesSearch" styleClass="edit">
 
-        <rich:collapsiblePanel header="Filtros de busqueda" switchType="client">
+        <rich:collapsiblePanel header="Filtros de busqueda" switchType="client" expanded="false" title="Haga click aqui para ver u ocultar los filtros de busqueda">
 
             <h:panelGrid columns="2">
 				 <s:decorate template="layout/display.xhtml">
@@ -110,8 +110,8 @@
         </rich:collapsiblePanel>
 
         <div class="actionButtons">
-            <h:commandButton id="search" value="Search" action="/MueblesList.xhtml"/>
-            <s:button id="reset" value="Reset" includePageParams="false"/>
+            <h:commandButton id="search" value="Buscar" action="/MueblesList.xhtml"/>
+            <s:button id="reset" value="Todos" includePageParams="false"/>
         </div>
 
     </h:form>

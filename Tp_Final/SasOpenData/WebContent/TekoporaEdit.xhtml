@@ -1,0 +1,122 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.org/schema/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="tekopora" styleClass="edit">
+
+        <rich:panel>
+            <f:facet name="header">#{tekoporaHome.managed ? 'Edit' : 'Add'} Tekopora</f:facet>
+
+
+            <s:decorate id="idField" template="layout/edit.xhtml">
+                <ui:define name="label">Id</ui:define>
+                <h:inputText id="id"
+                       required="true"
+                       disabled="#{tekoporaHome.managed}"
+                          value="#{tekoporaHome.instance.id}">
+                    <a:ajax event="blur" render="idField" bypassUpdates="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="nroCedulaField" template="layout/edit.xhtml">
+                <ui:define name="label">Nro cedula</ui:define>
+                <h:inputTextarea id="nroCedula"
+                               cols="80"
+                               rows="3"
+                              value="#{tekoporaHome.instance.nroCedula}"/>
+            </s:decorate>
+
+
+            <s:decorate id="nombreField" template="layout/edit.xhtml">
+                <ui:define name="label">Nombre</ui:define>
+                <h:inputTextarea id="nombre"
+                               cols="80"
+                               rows="3"
+                              value="#{tekoporaHome.instance.nombre}"/>
+            </s:decorate>
+
+
+            <s:decorate id="departamentoField" template="layout/edit.xhtml">
+                <ui:define name="label">Departamento</ui:define>
+                <h:inputTextarea id="departamento"
+                               cols="80"
+                               rows="3"
+                              value="#{tekoporaHome.instance.departamento}"/>
+            </s:decorate>
+
+
+            <s:decorate id="distritoField" template="layout/edit.xhtml">
+                <ui:define name="label">Distrito</ui:define>
+                <h:inputTextarea id="distrito"
+                               cols="80"
+                               rows="3"
+                              value="#{tekoporaHome.instance.distrito}"/>
+            </s:decorate>
+
+
+            <s:decorate id="importeMensualField" template="layout/edit.xhtml">
+                <ui:define name="label">Importe mensual</ui:define>
+                <h:inputText id="importeMensual"
+                          value="#{tekoporaHome.instance.importeMensual}">
+                    <a:ajax event="blur" render="importeMensualField" bypassUpdates="true"/>
+                </h:inputText>
+            </s:decorate>
+
+            <div style="clear:both">
+                <span class="required">*</span>
+                required fields
+            </div>
+
+        </rich:panel>
+
+        <div class="actionButtons">
+
+            <h:commandButton id="save"
+                          value="Save"
+                         action="#{tekoporaHome.persist}"
+                       disabled="#{!tekoporaHome.wired}"
+                       rendered="#{!tekoporaHome.managed}">
+                <s:conversationId/>
+            </h:commandButton>
+
+            <h:commandButton id="update"
+                          value="Save"
+                         action="#{tekoporaHome.update}"
+                       rendered="#{tekoporaHome.managed}">
+                <s:conversationId/>
+            </h:commandButton>
+
+            <h:commandButton id="delete"
+                          value="Delete"
+                         action="#{tekoporaHome.remove}"
+                      immediate="true"
+                       rendered="#{tekoporaHome.managed}"/>
+
+            <s:button id="cancelEdit"
+                   value="Cancel"
+             propagation="end"
+                    view="/Tekopora.xhtml"
+                rendered="#{tekoporaHome.managed}"/>
+
+            <s:button id="cancelAdd"
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty tekoporaFrom ? 'TekoporaList' : tekoporaFrom}.xhtml"
+                rendered="#{!tekoporaHome.managed}"/>
+
+        </div>
+    </h:form>
+
+</ui:define>
+
+</ui:composition>

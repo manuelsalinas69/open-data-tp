@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources xmlns="http://www.jboss.org/ironjacamar/schema">
+    <datasource 
+        jndi-name="OpenDataGuiDatasource"
+        enabled="true" 
+        use-java-context="true" pool-name="OpenDataGuiDatasource_pool">
+        <connection-url>jdbc:postgresql://localhost:5432/mueblesmec</connection-url>
+        <driver>org.postgresql</driver>
+        <security>
+		      <user-name>mueblesmec</user-name>
+		      <password>muebles_mec</password>
+        </security>
+    </datasource>
+</datasources>

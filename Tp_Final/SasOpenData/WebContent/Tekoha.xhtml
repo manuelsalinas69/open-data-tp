@@ -1,0 +1,84 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.org/schema/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Tekoha Details</f:facet>
+
+        <s:decorate id="id" template="layout/display.xhtml">
+            <ui:define name="label">Id</ui:define>
+            <h:outputText value="#{tekohaHome.instance.id}"/>
+        </s:decorate>
+
+        <s:decorate id="nroCedulaTitular" template="layout/display.xhtml">
+            <ui:define name="label">Nro cedula titular</ui:define>
+            <h:outputText value="#{tekohaHome.instance.nroCedulaTitular}"/>
+        </s:decorate>
+
+        <s:decorate id="nombreTitular" template="layout/display.xhtml">
+            <ui:define name="label">Nombre titular</ui:define>
+            <h:outputText value="#{tekohaHome.instance.nombreTitular}"/>
+        </s:decorate>
+
+        <s:decorate id="nroCedulaConyuge" template="layout/display.xhtml">
+            <ui:define name="label">Nro cedula conyuge</ui:define>
+            <h:outputText value="#{tekohaHome.instance.nroCedulaConyuge}"/>
+        </s:decorate>
+
+        <s:decorate id="nombreConyuge" template="layout/display.xhtml">
+            <ui:define name="label">Nombre conyuge</ui:define>
+            <h:outputText value="#{tekohaHome.instance.nombreConyuge}"/>
+        </s:decorate>
+
+        <s:decorate id="departamento" template="layout/display.xhtml">
+            <ui:define name="label">Departamento</ui:define>
+            <h:outputText value="#{tekohaHome.instance.departamento}"/>
+        </s:decorate>
+
+        <s:decorate id="distrito" template="layout/display.xhtml">
+            <ui:define name="label">Distrito</ui:define>
+            <h:outputText value="#{tekohaHome.instance.distrito}"/>
+        </s:decorate>
+
+        <s:decorate id="territorioSocial" template="layout/display.xhtml">
+            <ui:define name="label">Territorio social</ui:define>
+            <h:outputText value="#{tekohaHome.instance.territorioSocial}"/>
+        </s:decorate>
+
+        <s:decorate id="manzana" template="layout/display.xhtml">
+            <ui:define name="label">Manzana</ui:define>
+            <h:outputText value="#{tekohaHome.instance.manzana}"/>
+        </s:decorate>
+
+        <s:decorate id="lote" template="layout/display.xhtml">
+            <ui:define name="label">Lote</ui:define>
+            <h:outputText value="#{tekohaHome.instance.lote}"/>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/TekohaEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/#{empty tekohaFrom ? 'TekohaList' : tekohaFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+</ui:define>
+
+</ui:composition>

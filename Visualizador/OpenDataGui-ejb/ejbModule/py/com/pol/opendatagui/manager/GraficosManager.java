@@ -3,7 +3,6 @@ package py.com.pol.opendatagui.manager;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.model.SelectItem;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -33,7 +32,8 @@ public class GraficosManager implements Serializable{
 	
 	@Create
 	public void init(){
-
+		 departamento="central";
+		 estadoConservacion="bueno";
 	}
 	
 
@@ -62,12 +62,26 @@ public class GraficosManager implements Serializable{
 		jsonData=getEstadoSeleccionadoPorDepartamento(estadoConservacion);
 	}
 	
+	public void reportMontosPorDepartamento(){
+		jsonData=null;
+		jsonData=getMontosPorDepartamento();
+	}
+
+	
 	
 	
 	
 	@SuppressWarnings("unchecked")
+	private List<Object[]> getMontosPorDepartamento() {
+		String hql="SELECT m.id.departamento, sum((m.id.valorTotal)/1000000) FROM Muebles m GROUP BY m.id.departamento ORDER BY m.id.departamento";
+		Query q= entityManager.createQuery(hql);
+		return q.getResultList();
+	}
+
+
+	@SuppressWarnings("unchecked")
 	private List<Object[]> getEstadoSeleccionadoPorDepartamento(String estadoConservacion) {
-		String hql="SELECT m.id.departamento, sum(m.id.cantidad) FROM Muebles m WHERE lower(m.id.estadoConservacion)=lower(:estadoConservacion) GROUP BY m.id.departamento ORDER BY m.id.departamento";
+		String hql="SELECT m.id.departamento, sum((m.id.valorTotal)/1000000) FROM Muebles m WHERE lower(m.id.estadoConservacion)=lower(:estadoConservacion) GROUP BY m.id.departamento ORDER BY m.id.departamento";
 		Query q= entityManager.createQuery(hql);
 		q.setParameter("estadoConservacion", estadoConservacion);
 		return q.getResultList();
@@ -76,7 +90,7 @@ public class GraficosManager implements Serializable{
 
 	@SuppressWarnings("unchecked")
 	private List<Object[]> getCantidadPorDepartamento() {
-		String hql="SELECT m.id.departamento, sum(m.id.cantidad) FROM Muebles m GROUP BY m.id.departamento ORDER BY m.id.departamento";
+		String hql="SELECT m.id.departamento, sum((m.id.valorTotal)/1000000) FROM Muebles m GROUP BY m.id.departamento ORDER BY m.id.departamento";
 		Query q= entityManager.createQuery(hql);
 		return q.getResultList();
 	}
@@ -84,7 +98,7 @@ public class GraficosManager implements Serializable{
 	
 	@SuppressWarnings("unchecked")
 	private List<Object[]> getEstadoPorDepartamento(String departamento) {
-		String sql="SELECT estado_conservacion, sum(cantidad) FROM Muebles WHERE lower(departamento)=lower(:departamento) GROUP BY estado_conservacion ORDER BY estado_conservacion";
+		String sql="SELECT estado_conservacion, sum((valor_total)/1000000) FROM Muebles WHERE lower(departamento)=lower(:departamento) GROUP BY estado_conservacion ORDER BY estado_conservacion";
 		Query q= entityManager.createNativeQuery(sql);
 		q.setParameter("departamento", departamento);
 		return q.getResultList();
@@ -92,7 +106,7 @@ public class GraficosManager implements Serializable{
 	
 	@SuppressWarnings("unchecked")
 	private List<Object[]> getEstadoGeneral() {
-		String sql="SELECT estado_conservacion, sum(cantidad) FROM Muebles GROUP BY estado_conservacion ORDER BY estado_conservacion";
+		String sql="SELECT estado_conservacion, sum((valor_total)/1000000) FROM Muebles GROUP BY estado_conservacion ORDER BY estado_conservacion";
 		Query q= entityManager.createNativeQuery(sql);
 		return q.getResultList();
 	}

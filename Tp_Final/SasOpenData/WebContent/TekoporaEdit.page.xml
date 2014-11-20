@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.org/schema/seam/pages"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://jboss.org/schema/seam/pages http://jboss.org/schema/seam/pages-2.3.xsd"
+      no-conversation-view-id="/TekoporaList.xhtml"
+      login-required="true">
+
+   <begin-conversation join="true" flush-mode="MANUAL"/>
+
+   <action execute="#{tekoporaHome.wire}"/>
+
+   <param name="tekoporaFrom"/>
+   <param name="tekoporaId" value="#{tekoporaHome.tekoporaId}"/>
+
+
+   <navigation from-action="#{tekoporaHome.persist}">
+      <rule if-outcome="persisted">
+         <end-conversation/>
+         <redirect view-id="/Tekopora.xhtml"/>
+      </rule>
+   </navigation>
+
+   <navigation from-action="#{tekoporaHome.update}">
+      <rule if-outcome="updated">
+         <end-conversation/>
+         <redirect view-id="/Tekopora.xhtml"/>
+      </rule>
+   </navigation>
+
+   <navigation from-action="#{tekoporaHome.remove}">
+      <rule if-outcome="removed">
+         <end-conversation/>
+         <redirect view-id="/TekoporaList.xhtml"/>
+      </rule>
+   </navigation>
+
+</page>

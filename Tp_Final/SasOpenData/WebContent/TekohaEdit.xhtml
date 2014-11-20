@@ -1,0 +1,158 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.org/schema/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="tekoha" styleClass="edit">
+
+        <rich:panel>
+            <f:facet name="header">#{tekohaHome.managed ? 'Edit' : 'Add'} Tekoha</f:facet>
+
+
+            <s:decorate id="idField" template="layout/edit.xhtml">
+                <ui:define name="label">Id</ui:define>
+                <h:inputText id="id"
+                       required="true"
+                       disabled="#{tekohaHome.managed}"
+                          value="#{tekohaHome.instance.id}">
+                    <a:ajax event="blur" render="idField" bypassUpdates="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="nroCedulaTitularField" template="layout/edit.xhtml">
+                <ui:define name="label">Nro cedula titular</ui:define>
+                <h:inputTextarea id="nroCedulaTitular"
+                               cols="80"
+                               rows="3"
+                              value="#{tekohaHome.instance.nroCedulaTitular}"/>
+            </s:decorate>
+
+
+            <s:decorate id="nombreTitularField" template="layout/edit.xhtml">
+                <ui:define name="label">Nombre titular</ui:define>
+                <h:inputTextarea id="nombreTitular"
+                               cols="80"
+                               rows="3"
+                              value="#{tekohaHome.instance.nombreTitular}"/>
+            </s:decorate>
+
+
+            <s:decorate id="nroCedulaConyugeField" template="layout/edit.xhtml">
+                <ui:define name="label">Nro cedula conyuge</ui:define>
+                <h:inputTextarea id="nroCedulaConyuge"
+                               cols="80"
+                               rows="3"
+                              value="#{tekohaHome.instance.nroCedulaConyuge}"/>
+            </s:decorate>
+
+
+            <s:decorate id="nombreConyugeField" template="layout/edit.xhtml">
+                <ui:define name="label">Nombre conyuge</ui:define>
+                <h:inputTextarea id="nombreConyuge"
+                               cols="80"
+                               rows="3"
+                              value="#{tekohaHome.instance.nombreConyuge}"/>
+            </s:decorate>
+
+
+            <s:decorate id="departamentoField" template="layout/edit.xhtml">
+                <ui:define name="label">Departamento</ui:define>
+                <h:inputTextarea id="departamento"
+                               cols="80"
+                               rows="3"
+                              value="#{tekohaHome.instance.departamento}"/>
+            </s:decorate>
+
+
+            <s:decorate id="distritoField" template="layout/edit.xhtml">
+                <ui:define name="label">Distrito</ui:define>
+                <h:inputTextarea id="distrito"
+                               cols="80"
+                               rows="3"
+                              value="#{tekohaHome.instance.distrito}"/>
+            </s:decorate>
+
+
+            <s:decorate id="territorioSocialField" template="layout/edit.xhtml">
+                <ui:define name="label">Territorio social</ui:define>
+                <h:inputTextarea id="territorioSocial"
+                               cols="80"
+                               rows="3"
+                              value="#{tekohaHome.instance.territorioSocial}"/>
+            </s:decorate>
+
+
+            <s:decorate id="manzanaField" template="layout/edit.xhtml">
+                <ui:define name="label">Manzana</ui:define>
+                <h:inputTextarea id="manzana"
+                               cols="80"
+                               rows="3"
+                              value="#{tekohaHome.instance.manzana}"/>
+            </s:decorate>
+
+
+            <s:decorate id="loteField" template="layout/edit.xhtml">
+                <ui:define name="label">Lote</ui:define>
+                <h:inputText id="lote"
+                          value="#{tekohaHome.instance.lote}">
+                    <a:ajax event="blur" render="loteField" bypassUpdates="true"/>
+                </h:inputText>
+            </s:decorate>
+
+            <div style="clear:both">
+                <span class="required">*</span>
+                required fields
+            </div>
+
+        </rich:panel>
+
+        <div class="actionButtons">
+
+            <h:commandButton id="save"
+                          value="Save"
+                         action="#{tekohaHome.persist}"
+                       disabled="#{!tekohaHome.wired}"
+                       rendered="#{!tekohaHome.managed}">
+                <s:conversationId/>
+            </h:commandButton>
+
+            <h:commandButton id="update"
+                          value="Save"
+                         action="#{tekohaHome.update}"
+                       rendered="#{tekohaHome.managed}">
+                <s:conversationId/>
+            </h:commandButton>
+
+            <h:commandButton id="delete"
+                          value="Delete"
+                         action="#{tekohaHome.remove}"
+                      immediate="true"
+                       rendered="#{tekohaHome.managed}"/>
+
+            <s:button id="cancelEdit"
+                   value="Cancel"
+             propagation="end"
+                    view="/Tekoha.xhtml"
+                rendered="#{tekohaHome.managed}"/>
+
+            <s:button id="cancelAdd"
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty tekohaFrom ? 'TekohaList' : tekohaFrom}.xhtml"
+                rendered="#{!tekohaHome.managed}"/>
+
+        </div>
+    </h:form>
+
+</ui:define>
+
+</ui:composition>

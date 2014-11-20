@@ -1,0 +1,64 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.org/schema/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Tekopora Details</f:facet>
+
+        <s:decorate id="id" template="layout/display.xhtml">
+            <ui:define name="label">Id</ui:define>
+            <h:outputText value="#{tekoporaHome.instance.id}"/>
+        </s:decorate>
+
+        <s:decorate id="nroCedula" template="layout/display.xhtml">
+            <ui:define name="label">Nro cedula</ui:define>
+            <h:outputText value="#{tekoporaHome.instance.nroCedula}"/>
+        </s:decorate>
+
+        <s:decorate id="nombre" template="layout/display.xhtml">
+            <ui:define name="label">Nombre</ui:define>
+            <h:outputText value="#{tekoporaHome.instance.nombre}"/>
+        </s:decorate>
+
+        <s:decorate id="departamento" template="layout/display.xhtml">
+            <ui:define name="label">Departamento</ui:define>
+            <h:outputText value="#{tekoporaHome.instance.departamento}"/>
+        </s:decorate>
+
+        <s:decorate id="distrito" template="layout/display.xhtml">
+            <ui:define name="label">Distrito</ui:define>
+            <h:outputText value="#{tekoporaHome.instance.distrito}"/>
+        </s:decorate>
+
+        <s:decorate id="importeMensual" template="layout/display.xhtml">
+            <ui:define name="label">Importe mensual</ui:define>
+            <h:outputText value="#{tekoporaHome.instance.importeMensual}"/>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/TekoporaEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/#{empty tekoporaFrom ? 'TekoporaList' : tekoporaFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+</ui:define>
+
+</ui:composition>

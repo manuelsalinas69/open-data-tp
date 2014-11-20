@@ -1,0 +1,60 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.org/schema/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Departamento Details</f:facet>
+
+        <s:decorate id="departamento" template="layout/display.xhtml">
+            <ui:define name="label">Departamento</ui:define>
+            <h:outputText value="#{departamentoHome.instance.departamento}"/>
+        </s:decorate>
+
+        <s:decorate id="poblacion" template="layout/display.xhtml">
+            <ui:define name="label">Poblacion</ui:define>
+            <h:outputText value="#{departamentoHome.instance.poblacion}">
+                <f:convertNumber/>
+            </h:outputText>
+        </s:decorate>
+
+        <s:decorate id="superficie" template="layout/display.xhtml">
+            <ui:define name="label">Superficie</ui:define>
+            <h:outputText value="#{departamentoHome.instance.superficie}">
+                <f:convertNumber/>
+            </h:outputText>
+        </s:decorate>
+
+        <s:decorate id="densidad" template="layout/display.xhtml">
+            <ui:define name="label">Densidad</ui:define>
+            <h:outputText value="#{departamentoHome.instance.densidad}">
+                <f:convertNumber/>
+            </h:outputText>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/DepartamentoEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/#{empty departamentoFrom ? 'DepartamentoList' : departamentoFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+</ui:define>
+
+</ui:composition>

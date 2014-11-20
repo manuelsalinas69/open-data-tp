@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.org/schema/seam/pages"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://jboss.org/schema/seam/pages http://jboss.org/schema/seam/pages-2.3.xsd">
+
+   <param name="firstResult" value="#{tekohaList.firstResult}"/>
+   <param name="sort" value="#{tekohaList.orderColumn}"/>
+   <param name="dir" value="#{tekohaList.orderDirection}"/>
+   <param name="logic" value="#{tekohaList.restrictionLogicOperator}"/>
+
+   <param name="from"/>
+   <param name="nroCedulaTitular" value="#{tekohaList.tekoha.nroCedulaTitular}"/>
+   <param name="nombreTitular" value="#{tekohaList.tekoha.nombreTitular}"/>
+   <param name="nroCedulaConyuge" value="#{tekohaList.tekoha.nroCedulaConyuge}"/>
+   <param name="nombreConyuge" value="#{tekohaList.tekoha.nombreConyuge}"/>
+   <param name="departamento" value="#{tekohaList.tekoha.departamento}"/>
+   <param name="distrito" value="#{tekohaList.tekoha.distrito}"/>
+   <param name="territorioSocial" value="#{tekohaList.tekoha.territorioSocial}"/>
+   <param name="manzana" value="#{tekohaList.tekoha.manzana}"/>
+
+</page>

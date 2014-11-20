@@ -1,0 +1,112 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.org/schema/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="departamento" styleClass="edit">
+
+        <rich:panel>
+            <f:facet name="header">#{departamentoHome.managed ? 'Edit' : 'Add'} Departamento</f:facet>
+
+
+            <s:decorate id="departamentoField" template="layout/edit.xhtml">
+                <ui:define name="label">Departamento</ui:define>
+                <h:inputText id="departamento"
+                       disabled="#{departamentoHome.managed}"
+                       required="true"
+                           size="50"
+                      maxlength="50"
+                          value="#{departamentoHome.instance.departamento}">
+                    <a:ajax event="blur" render="departamentoField" bypassUpdates="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="poblacionField" template="layout/edit.xhtml">
+                <ui:define name="label">Poblacion</ui:define>
+                <h:inputText id="poblacion"
+                       required="true"
+                          value="#{departamentoHome.instance.poblacion}"
+                           size="131,096">
+                    <a:ajax event="blur" render="poblacionField" bypassUpdates="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="superficieField" template="layout/edit.xhtml">
+                <ui:define name="label">Superficie</ui:define>
+                <h:inputText id="superficie"
+                       required="true"
+                          value="#{departamentoHome.instance.superficie}"
+                           size="29">
+                    <a:ajax event="blur" render="superficieField" bypassUpdates="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="densidadField" template="layout/edit.xhtml">
+                <ui:define name="label">Densidad</ui:define>
+                <h:inputText id="densidad"
+                       required="true"
+                          value="#{departamentoHome.instance.densidad}"
+                           size="29">
+                    <a:ajax event="blur" render="densidadField" bypassUpdates="true"/>
+                </h:inputText>
+            </s:decorate>
+
+            <div style="clear:both">
+                <span class="required">*</span>
+                required fields
+            </div>
+
+        </rich:panel>
+
+        <div class="actionButtons">
+
+            <h:commandButton id="save"
+                          value="Save"
+                         action="#{departamentoHome.persist}"
+                       disabled="#{!departamentoHome.wired}"
+                       rendered="#{!departamentoHome.managed}">
+                <s:conversationId/>
+            </h:commandButton>
+
+            <h:commandButton id="update"
+                          value="Save"
+                         action="#{departamentoHome.update}"
+                       rendered="#{departamentoHome.managed}">
+                <s:conversationId/>
+            </h:commandButton>
+
+            <h:commandButton id="delete"
+                          value="Delete"
+                         action="#{departamentoHome.remove}"
+                      immediate="true"
+                       rendered="#{departamentoHome.managed}"/>
+
+            <s:button id="cancelEdit"
+                   value="Cancel"
+             propagation="end"
+                    view="/Departamento.xhtml"
+                rendered="#{departamentoHome.managed}"/>
+
+            <s:button id="cancelAdd"
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty departamentoFrom ? 'DepartamentoList' : departamentoFrom}.xhtml"
+                rendered="#{!departamentoHome.managed}"/>
+
+        </div>
+    </h:form>
+
+</ui:define>
+
+</ui:composition>

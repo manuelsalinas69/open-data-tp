@@ -1,0 +1,69 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.org/schema/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Pescadores Details</f:facet>
+
+        <s:decorate id="id" template="layout/display.xhtml">
+            <ui:define name="label">Id</ui:define>
+            <h:outputText value="#{pescadoresHome.instance.id}"/>
+        </s:decorate>
+
+        <s:decorate id="nroCedula" template="layout/display.xhtml">
+            <ui:define name="label">Nro cedula</ui:define>
+            <h:outputText value="#{pescadoresHome.instance.nroCedula}"/>
+        </s:decorate>
+
+        <s:decorate id="registro" template="layout/display.xhtml">
+            <ui:define name="label">Registro</ui:define>
+            <h:outputText value="#{pescadoresHome.instance.registro}"/>
+        </s:decorate>
+
+        <s:decorate id="nombre" template="layout/display.xhtml">
+            <ui:define name="label">Nombre</ui:define>
+            <h:outputText value="#{pescadoresHome.instance.nombre}"/>
+        </s:decorate>
+
+        <s:decorate id="apellido" template="layout/display.xhtml">
+            <ui:define name="label">Apellido</ui:define>
+            <h:outputText value="#{pescadoresHome.instance.apellido}"/>
+        </s:decorate>
+
+        <s:decorate id="asociacion" template="layout/display.xhtml">
+            <ui:define name="label">Asociacion</ui:define>
+            <h:outputText value="#{pescadoresHome.instance.asociacion}"/>
+        </s:decorate>
+
+        <s:decorate id="importeSubsidio" template="layout/display.xhtml">
+            <ui:define name="label">Importe subsidio</ui:define>
+            <h:outputText value="#{pescadoresHome.instance.importeSubsidio}"/>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/PescadoresEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/#{empty pescadoresFrom ? 'PescadoresList' : pescadoresFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+</ui:define>
+
+</ui:composition>

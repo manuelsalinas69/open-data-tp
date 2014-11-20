@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a="http://richfaces.org/a4j">
+	<div class="mainMenu">
+		<h:form>
+			<ul class="menu">
+				<ui:insert name="menu">
+					<h:panelGroup>
+						
+						
+						<li class="top"><span> <s:link styleClass="top_link"
+									 view="/TekohaList.xhtml"
+									value="Tekoha" propagation="none" /></span></li>
+						<li class="top"><span> <s:link styleClass="top_link"
+									 view="/TekoporaList.xhtml"
+									value="Tekopora" propagation="none" /></span></li>
+						<li class="top"><span> <s:link styleClass="top_link"
+									 view="/PescadoresList.xhtml"
+									value="Pescadores" propagation="none" /></span></li>
+						<li class="top"><span> <s:link styleClass="top_link"
+									 view="/Estadisticas.xhtml"
+									value="Estadisticas" propagation="none" /></span></li>
+					</h:panelGroup>
+
+					
+				
+
+
+
+				</ui:insert>
+			</ul>
+
+		</h:form>
+	</div>
+</ui:composition>

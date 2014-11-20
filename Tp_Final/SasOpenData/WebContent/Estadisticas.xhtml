@@ -1,0 +1,99 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a="http://richfaces.org/a4j" template="layout/template.xhtml">
+
+	<ui:define name="body">
+		<s:decorate template="/layout/title.xhtml">
+			<ui:define name="label">
+				Estadisticas
+			</ui:define>
+		</s:decorate>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jquery.jqplot.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.barRenderer.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.pieRenderer.min.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.categoryAxisRenderer.min.js"></script>
+
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.canvasTextRenderer.min.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.canvasAxisTickRenderer.min.js"></script>
+
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.dateAxisRenderer.min.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.pointLabels.min.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/utils/jplotUtil.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.cursor.min.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/d3js/d3plus.full.min.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/utils/d3jsUtil.js"></script>
+
+		<script type="text/javascript">
+		$(document).ready(function(){
+			load1();load2();load3();load4();load5();/*load6(),load7();load8();*/
+		});
+		</script>
+		
+		<link rel="stylesheet" type="text/css"
+			href="#{facesContext.externalContext.requestContextPath}/styles/jplot/jquery.jqplot.css" />
+		<h:form>
+			<!-- Functions -->
+			<a:jsFunction name="load1" action="#{estadisticasManager.tkh_terrenosPorDepartamento()}" execute="@this"
+				data="#{estadisticasManager.treeMapDataArray}" oncomplete="plotTreeMap(event.data,'#terrenoPorDepto')"
+			/>
+			<a:jsFunction name="load2" action="#{estadisticasManager.tkh_terrenosPorDistrito()}" execute="@this"
+				data="#{estadisticasManager.treeMapDataArray}" oncomplete="plotTreeMap(event.data,'#terrenoPorDistritos')"
+			/>
+			
+			<a:jsFunction name="load3" action="#{estadisticasManager.tkp_montosPorDepartamento()}" execute="@this"
+				data="#{estadisticasManager.treeMapDataArray}" oncomplete="plotTreeMap(event.data,'#montosPorDepto')"
+			/>
+			<a:jsFunction name="load4" action="#{estadisticasManager.tkp_montosPorDistrito()}" execute="@this"
+				data="#{estadisticasManager.treeMapDataArray}" oncomplete="plotTreeMap(event.data,'#montosPorDistritos')"
+			/>
+			
+			<a:jsFunction name="load5" action="#{estadisticasManager.psc_MontosPorAsociacion()}" execute="@this"
+				data="#{estadisticasManager.treeMapDataArray}" oncomplete="plotTreeMap(event.data,'#montosPescadores')"
+			/>
+
+			<h:panelGrid width="1000px">
+				<span><h2>Tekoha - Cantidad de terrenos otorgados por departamento</h2></span>
+				<div id="terrenoPorDepto" style="height: 350px"></div>
+				<span><h2>Tekoha - Cantidad de terrenos otorgados por distritos de un departamento</h2></span>
+				<h:selectOneMenu value="#{estadisticasManager.departamento}">
+					<f:selectItems value="#{departamentoSelectItems}"/>
+					<a:ajax event="change" execute="@this" oncomplete="load2()"/>
+				</h:selectOneMenu>
+				<div id="terrenoPorDistritos" style="height: 350px"></div>
+				
+				<span><h2>Tekopora - Cantidad de aporte mensual otorgado por departamento</h2></span>
+				<div id="montosPorDepto" style="height: 350px"></div>
+				<span><h2>Tekopora - Cantidad de aporte mensual otorgado por distritos de un departamento</h2></span>
+				<h:selectOneMenu value="#{estadisticasManager.departamento_1}">
+					<f:selectItems value="#{departamento_1SelectItems}"/>
+					<a:ajax event="change" execute="@this" oncomplete="load4()"/>
+				</h:selectOneMenu>
+				<div id="montosPorDistritos" style="height: 350px"></div>
+				
+				<span><h2>Pescadores - Cantidad de subsidio mensual otorgado a los pescadores por asociacion</h2></span>
+				<div id="montosPescadores" style="height: 350px"></div>
+				
+				
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
