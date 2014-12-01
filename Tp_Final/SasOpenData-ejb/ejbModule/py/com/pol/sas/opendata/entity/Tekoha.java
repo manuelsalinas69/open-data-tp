@@ -4,7 +4,10 @@ package py.com.pol.sas.opendata.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -19,7 +22,7 @@ public class Tekoha implements java.io.Serializable {
 	private String nombreTitular;
 	private String nroCedulaConyuge;
 	private String nombreConyuge;
-	private String departamento;
+	private Departamento departamento;
 	private String distrito;
 	private String territorioSocial;
 	private String manzana;
@@ -41,7 +44,7 @@ public class Tekoha implements java.io.Serializable {
 		this.nombreTitular = nombreTitular;
 		this.nroCedulaConyuge = nroCedulaConyuge;
 		this.nombreConyuge = nombreConyuge;
-		this.departamento = departamento;
+		//this.departamento = departamento;
 		this.distrito = distrito;
 		this.territorioSocial = territorioSocial;
 		this.manzana = manzana;
@@ -94,12 +97,14 @@ public class Tekoha implements java.io.Serializable {
 		this.nombreConyuge = nombreConyuge;
 	}
 
-	@Column(name = "departamento")
-	public String getDepartamento() {
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_departamento")
+	public Departamento getDepartamento() {
 		return this.departamento;
 	}
 
-	public void setDepartamento(String departamento) {
+	public void setDepartamento(Departamento departamento) {
 		this.departamento = departamento;
 	}
 

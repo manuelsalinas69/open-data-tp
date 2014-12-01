@@ -14,6 +14,8 @@ import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
 
+import py.com.pol.sas.opendata.entity.Departamento;
+
 @Name("selectItemsHelper")
 @Scope(ScopeType.PAGE)
 public class SelectItemsHelper implements Serializable {
@@ -30,34 +32,34 @@ public class SelectItemsHelper implements Serializable {
 	@SuppressWarnings("unchecked")
 	@Factory(value="departamentoSelectItems",scope=ScopeType.PAGE,autoCreate=true)
 	public List<SelectItem> departamentoSelectItems(){
-		String hql="SELECT distinct(lower(tkh.departamento)) FROM Tekoha tkh  ORDER BY lower(tkh.departamento) ";
+		String hql="SELECT _dep FROM Departamento _dep  ORDER BY _dep.idDepartamento ";
 		List<SelectItem> selectItems= new ArrayList<SelectItem>();
 		//selectItems.add(new SelectItem(null, "Seleccione..."));
 		Query q=entityManager.createQuery(hql);
-		List<String> l= q.getResultList();
+		List<Departamento> l= q.getResultList();
 
-		for (String dep : l) {
-			selectItems.add(new SelectItem(dep, dep));
+		for (Departamento dep : l) {
+			selectItems.add(new SelectItem(dep.getIdDepartamento(), dep.getDepartamento()));
 			
 		}
 		return selectItems;
 	}
 	
-	@SuppressWarnings("unchecked")
-	@Factory(value="departamento_1SelectItems",scope=ScopeType.PAGE,autoCreate=true)
-	public List<SelectItem> departamento_1SelectItems(){
-		String hql="SELECT distinct(lower(tkh.departamento)) FROM Tekopora tkh  ORDER BY lower(tkh.departamento) ";
-		List<SelectItem> selectItems= new ArrayList<SelectItem>();
-		//selectItems.add(new SelectItem(null, "Seleccione..."));
-		Query q=entityManager.createQuery(hql);
-		List<String> l= q.getResultList();
-
-		for (String dep : l) {
-			selectItems.add(new SelectItem(dep, dep));
-			
-		}
-		return selectItems;
-	}
+//	@SuppressWarnings("unchecked")
+//	@Factory(value="departamento_1SelectItems",scope=ScopeType.PAGE,autoCreate=true)
+//	public List<SelectItem> departamento_1SelectItems(){
+//		String hql="SELECT distinct(lower(tkh.departamento)) FROM Tekopora tkh  ORDER BY lower(tkh.departamento) ";
+//		List<SelectItem> selectItems= new ArrayList<SelectItem>();
+//		//selectItems.add(new SelectItem(null, "Seleccione..."));
+//		Query q=entityManager.createQuery(hql);
+//		List<String> l= q.getResultList();
+//
+//		for (String dep : l) {
+//			selectItems.add(new SelectItem(dep, dep));
+//			
+//		}
+//		return selectItems;
+//	}
 	
 	
 }

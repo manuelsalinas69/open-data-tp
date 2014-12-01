@@ -4,7 +4,10 @@ package py.com.pol.sas.opendata.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -17,7 +20,7 @@ public class Tekopora implements java.io.Serializable {
 	private int id;
 	private String nroCedula;
 	private String nombre;
-	private String departamento;
+	private Departamento departamento;
 	private String distrito;
 	private Double importeMensual;
 
@@ -33,7 +36,7 @@ public class Tekopora implements java.io.Serializable {
 		this.id = id;
 		this.nroCedula = nroCedula;
 		this.nombre = nombre;
-		this.departamento = departamento;
+		//this.departamento = departamento;
 		this.distrito = distrito;
 		this.importeMensual = importeMensual;
 	}
@@ -66,12 +69,13 @@ public class Tekopora implements java.io.Serializable {
 		this.nombre = nombre;
 	}
 
-	@Column(name = "departamento")
-	public String getDepartamento() {
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_departamento")
+	public Departamento getDepartamento() {
 		return this.departamento;
 	}
 
-	public void setDepartamento(String departamento) {
+	public void setDepartamento(Departamento departamento) {
 		this.departamento = departamento;
 	}
 

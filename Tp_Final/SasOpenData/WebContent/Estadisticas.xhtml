@@ -83,7 +83,7 @@
 				<div id="montosPorDepto" style="height: 350px"></div>
 				<span><h2>Tekopora - Cantidad de aporte mensual otorgado por distritos de un departamento</h2></span>
 				<h:selectOneMenu value="#{estadisticasManager.departamento_1}">
-					<f:selectItems value="#{departamento_1SelectItems}"/>
+					<f:selectItems value="#{departamentoSelectItems}"/>
 					<a:ajax event="change" execute="@this" oncomplete="load4()"/>
 				</h:selectOneMenu>
 				<div id="montosPorDistritos" style="height: 350px"></div>

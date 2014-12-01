@@ -36,15 +36,15 @@ public class EstadisticasManager implements Serializable{
 	private List<Object[]> data;
 	private List<TreeMapDto> treeMapData;
 	private TreeMapDto[] treeMapDataArray;
-	private String departamento;
-	private String departamento_1;
+	private Long departamento;
+	private Long departamento_1;
 	
 
 	@Create
 	public void init(){
 		treeMapData=new ArrayList<TreeMapDto>();
-		departamento="central";
-		departamento_1="central";
+		departamento=11L;//Central
+		departamento_1=11L;//Central
 	}
 	
 	
@@ -62,7 +62,7 @@ public class EstadisticasManager implements Serializable{
 	
 	@SuppressWarnings("unchecked")
 	private List<Object[]> getTerrenosPorDpto() {
-		String hql="SELECT tkh.departamento, count(*) FROM Tekoha tkh GROUP BY tkh.departamento ORDER BY tkh.departamento";
+		String hql="SELECT tkh.departamento.departamento, count(*) FROM Tekoha tkh GROUP BY tkh.departamento.departamento ORDER BY tkh.departamento.departamento";
 		Query q=entityManager.createQuery(hql);
 		return q.getResultList();
 	}
@@ -70,7 +70,7 @@ public class EstadisticasManager implements Serializable{
 
 	public void tkh_terrenosPorDistrito(){
 		data=null;
-		if (departamento==null || departamento.trim().isEmpty()) {
+		if (departamento==null) {
 			return;
 		}
 		data=getTerrenosPorDistrito(departamento);
@@ -83,8 +83,8 @@ public class EstadisticasManager implements Serializable{
 		}
 	}
 	@SuppressWarnings("unchecked")
-	private List<Object[]> getTerrenosPorDistrito(String depto) {
-		String hql="SELECT tkh.distrito,count(*) FROM Tekoha tkh WHERE lower(trim(tkh.departamento))=lower(trim(:depto)) GROUP BY tkh.distrito ORDER BY tkh.distrito";
+	private List<Object[]> getTerrenosPorDistrito(Long depto) {
+		String hql="SELECT tkh.distrito,count(*) FROM Tekoha tkh WHERE tkh.departamento.idDepartamento=:depto GROUP BY tkh.distrito ORDER BY tkh.distrito";
 		Query q=entityManager.createQuery(hql);
 		q.setParameter("depto", depto);
 		return q.getResultList();
@@ -107,7 +107,7 @@ public class EstadisticasManager implements Serializable{
 	
 	@SuppressWarnings("unchecked")
 	private List<Object[]> getMontosPorDpto() {
-		String hql="SELECT tkp.departamento, sum(tkp.importeMensual) FROM Tekopora tkp GROUP BY tkp.departamento ORDER BY tkp.departamento";
+		String hql="SELECT tkp.departamento.departamento, sum(tkp.importeMensual) FROM Tekopora tkp GROUP BY tkp.departamento.departamento ORDER BY tkp.departamento.departamento";
 		Query q=entityManager.createQuery(hql);
 		return q.getResultList();
 	}
@@ -115,7 +115,7 @@ public class EstadisticasManager implements Serializable{
 
 	public void tkp_montosPorDistrito(){
 		data=null;
-		if (departamento_1==null || departamento_1.trim().isEmpty()) {
+		if (departamento_1==null) {
 			return;
 		}
 		data=getMontosPorDistrito(departamento_1);
@@ -133,8 +133,8 @@ public class EstadisticasManager implements Serializable{
 
 	
 	@SuppressWarnings("unchecked")
-	private List<Object[]> getMontosPorDistrito(String depto) {
-		String hql="SELECT tkp.distrito, sum(tkp.importeMensual) FROM Tekopora tkp WHERE lower(trim(tkp.departamento))=lower(trim(:depto)) GROUP BY tkp.distrito ORDER BY tkp.distrito";
+	private List<Object[]> getMontosPorDistrito(Long depto) {
+		String hql="SELECT tkp.distrito, sum(tkp.importeMensual) FROM Tekopora tkp WHERE tkp.departamento.idDepartamento=:depto GROUP BY tkp.distrito ORDER BY tkp.distrito";
 		Query q=entityManager.createQuery(hql);
 		q.setParameter("depto", depto);
 		return q.getResultList();
@@ -176,22 +176,22 @@ public class EstadisticasManager implements Serializable{
 	}
 
 
-	public String getDepartamento() {
+	public Long getDepartamento() {
 		return departamento;
 	}
 
 
-	public void setDepartamento(String departamento) {
+	public void setDepartamento(Long departamento) {
 		this.departamento = departamento;
 	}
 
 
-	public String getDepartamento_1() {
+	public Long getDepartamento_1() {
 		return departamento_1;
 	}
 
 
-	public void setDepartamento_1(String departamento_1) {
+	public void setDepartamento_1(Long departamento_1) {
 		this.departamento_1 = departamento_1;
 	}
 

@@ -17,6 +17,7 @@ import javax.validation.constraints.Size;
 @Table(name = "departamento", schema = "public")
 public class Departamento implements java.io.Serializable {
 
+	private Long idDepartamento;
 	private String departamento;
 	private BigDecimal poblacion;
 	private BigDecimal superficie;
@@ -32,8 +33,19 @@ public class Departamento implements java.io.Serializable {
 		this.superficie = superficie;
 		this.densidad = densidad;
 	}
-
+	
+	
 	@Id
+	@Column(name = "id_departamento", unique = true, nullable = false)
+	public Long getIdDepartamento() {
+		return idDepartamento;
+	}
+
+	public void setIdDepartamento(Long idDepartamento) {
+		this.idDepartamento = idDepartamento;
+	}
+
+	
 	@Column(name = "departamento", unique = true, nullable = false, length = 50)
 	@NotNull
 	@Size(max = 50)
