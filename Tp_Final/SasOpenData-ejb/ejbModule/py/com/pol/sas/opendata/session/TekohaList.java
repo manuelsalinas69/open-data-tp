@@ -15,12 +15,13 @@ public class TekohaList extends EntityQuery<Tekoha> {
 			"lower(tekoha.nombreTitular) like lower(concat(#{tekohaList.tekoha.nombreTitular},'%'))",
 			"lower(tekoha.nroCedulaConyuge) like lower(concat(#{tekohaList.tekoha.nroCedulaConyuge},'%'))",
 			"lower(tekoha.nombreConyuge) like lower(concat(#{tekohaList.tekoha.nombreConyuge},'%'))",
-			"lower(tekoha.departamento) like lower(concat(#{tekohaList.tekoha.departamento},'%'))",
+			"tekoha.departamento.idDepartamento=#{tekohaList.idDepartamento}",
 			"lower(tekoha.distrito) like lower(concat(#{tekohaList.tekoha.distrito},'%'))",
 			"lower(tekoha.territorioSocial) like lower(concat(#{tekohaList.tekoha.territorioSocial},'%'))",
 			"lower(tekoha.manzana) like lower(concat(#{tekohaList.tekoha.manzana},'%'))", };
 
 	private Tekoha tekoha = new Tekoha();
+	private Long idDepartamento;
 
 	public TekohaList() {
 		setEjbql(EJBQL);
@@ -31,4 +32,16 @@ public class TekohaList extends EntityQuery<Tekoha> {
 	public Tekoha getTekoha() {
 		return tekoha;
 	}
+
+	public Long getIdDepartamento() {
+		return idDepartamento;
+	}
+
+	public void setIdDepartamento(Long idDepartamento) {
+		this.idDepartamento = idDepartamento;
+	}
+
+	
+	
+	
 }

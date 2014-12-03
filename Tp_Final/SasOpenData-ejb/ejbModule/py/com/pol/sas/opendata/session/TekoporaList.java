@@ -13,10 +13,12 @@ public class TekoporaList extends EntityQuery<Tekopora> {
 	private static final String[] RESTRICTIONS = {
 			"lower(tekopora.nroCedula) like lower(concat(#{tekoporaList.tekopora.nroCedula},'%'))",
 			"lower(tekopora.nombre) like lower(concat(#{tekoporaList.tekopora.nombre},'%'))",
-			"lower(tekopora.departamento) like lower(concat(#{tekoporaList.tekopora.departamento},'%'))",
+			"tekopora.departamento.idDepartamento=#{tekoporaList.idDepartamento}",
 			"lower(tekopora.distrito) like lower(concat(#{tekoporaList.tekopora.distrito},'%'))", };
 
 	private Tekopora tekopora = new Tekopora();
+	
+	private Long idDepartamento;
 
 	public TekoporaList() {
 		setEjbql(EJBQL);
@@ -27,4 +29,14 @@ public class TekoporaList extends EntityQuery<Tekopora> {
 	public Tekopora getTekopora() {
 		return tekopora;
 	}
+
+	public Long getIdDepartamento() {
+		return idDepartamento;
+	}
+
+	public void setIdDepartamento(Long idDepartamento) {
+		this.idDepartamento = idDepartamento;
+	}
+	
+	
 }

@@ -13,7 +13,7 @@
    <param name="nombreTitular" value="#{tekohaList.tekoha.nombreTitular}"/>
    <param name="nroCedulaConyuge" value="#{tekohaList.tekoha.nroCedulaConyuge}"/>
    <param name="nombreConyuge" value="#{tekohaList.tekoha.nombreConyuge}"/>
-   <param name="departamento" value="#{tekohaList.tekoha.departamento}"/>
+   <param name="departamento" value="#{tekohaList.idDepartamento}"/>
    <param name="distrito" value="#{tekohaList.tekoha.distrito}"/>
    <param name="territorioSocial" value="#{tekohaList.tekoha.territorioSocial}"/>
    <param name="manzana" value="#{tekohaList.tekoha.manzana}"/>

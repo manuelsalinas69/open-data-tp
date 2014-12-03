@@ -12,6 +12,7 @@ public class TreeMapDto implements Serializable{
 	String name;
 	String size;
 	Long value;
+	String group;
 	public TreeMapDto() {
 		
 	}
@@ -56,6 +57,18 @@ public class TreeMapDto implements Serializable{
 
 	public void setValue(Long value) {
 		this.value = value;
+	}
+
+
+
+	public String getGroup() {
+		return group;
+	}
+
+
+
+	public void setGroup(String group) {
+		this.group = group;
 	}
 	
 	

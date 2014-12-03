@@ -1,175 +1,230 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:s="http://jboss.org/schema/seam/taglib"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:rich="http://richfaces.org/rich"
-    template="layout/template.xhtml">
+	xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich" 
+	xmlns:a="http://richfaces.org/a4j" 
+	template="layout/template.xhtml">
 
-<ui:define name="body">
+	<ui:define name="body">
+<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jquery.jqplot.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.barRenderer.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.pieRenderer.min.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.categoryAxisRenderer.min.js"></script>
 
-    <h:form id="pescadoresSearch" styleClass="edit">
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.canvasTextRenderer.min.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.canvasAxisTickRenderer.min.js"></script>
 
-        <rich:collapsiblePanel header="Filtros de Busqueda" switchType="client" title="Haga click aqui para visualizar los filtros de busqueda" expanded="false">
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.dateAxisRenderer.min.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.pointLabels.min.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/utils/jplotUtil.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jqplot.cursor.min.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/d3js/d3plus.full.min.js"></script>
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/javascript/utils/d3jsUtil.js"></script>
 
-            <h:panelGrid columns="2">
-				<s:decorate template="layout/display.xhtml">
-					<ui:define name="label">Nro cedula</ui:define>
-					<h:inputText id="nroCedula" value="#{pescadoresList.pescadores.nroCedula}"/>
-				</s:decorate>
+		
+		
+		<link rel="stylesheet" type="text/css"
+			href="#{facesContext.externalContext.requestContextPath}/styles/jplot/jquery.jqplot.css" />
+		<h:form id="pescadoresSearch" styleClass="edit">
+			
+			<a:jsFunction name="load5" action="#{estadisticasManager.psc_MontosPorAsociacion()}" execute="@this"
+				data="#{estadisticasManager.treeMapDataArray}" oncomplete="plotTreeMap(event.data,'#montosPescadores')"
+			/>
+			<rich:tabPanel switchType="client">
+				<rich:tab header="Datos">
+					<h:panelGrid columns="2" columnClasses="top,top">
+						<h:panelGrid>
+							<rich:collapsiblePanel header="Filtros de Busqueda"
+								switchType="client">
 
-				<s:decorate template="layout/display.xhtml">
-					<ui:define name="label">Nombre</ui:define>
-					<h:inputText id="nombre" value="#{pescadoresList.pescadores.nombre}"/>
-				</s:decorate>
+								<h:panelGrid columns="1">
+									<s:decorate template="layout/display.xhtml">
+										<ui:define name="label">Nro cedula</ui:define>
+										<h:inputText id="nroCedula"
+											value="#{pescadoresList.pescadores.nroCedula}" />
+									</s:decorate>
 
-				<s:decorate template="layout/display.xhtml">
-					<ui:define name="label">Apellido</ui:define>
-					<h:inputText id="apellido" value="#{pescadoresList.pescadores.apellido}"/>
-				</s:decorate>
+									<s:decorate template="layout/display.xhtml">
+										<ui:define name="label">Nombre</ui:define>
+										<h:inputText id="nombre"
+											value="#{pescadoresList.pescadores.nombre}" />
+									</s:decorate>
 
-				<s:decorate template="layout/display.xhtml">
-					<ui:define name="label">Asociacion</ui:define>
-					<h:inputText id="asociacion" value="#{pescadoresList.pescadores.asociacion}"/>
-				</s:decorate>
-            </h:panelGrid>
-           
+									<s:decorate template="layout/display.xhtml">
+										<ui:define name="label">Apellido</ui:define>
+										<h:inputText id="apellido"
+											value="#{pescadoresList.pescadores.apellido}" />
+									</s:decorate>
 
-        </rich:collapsiblePanel>
+									<s:decorate template="layout/display.xhtml">
+										<ui:define name="label">Asociacion</ui:define>
+										<h:inputText id="asociacion"
+											value="#{pescadoresList.pescadores.asociacion}" />
+									</s:decorate>
+								</h:panelGrid>
 
-        <div class="actionButtons">
-            <h:commandButton id="search" value="Buscar" action="/PescadoresList.xhtml"/>
-            <s:button id="reset" value="Todos" includePageParams="false"/>
-        </div>
 
-    </h:form>
+							</rich:collapsiblePanel>
 
-    <rich:panel>
-        <f:facet name="header">Resultados de la busqueda (#{empty pescadoresList.resultList ? 0 : (pescadoresList.paginated ? pescadoresList.resultCount : pescadoresList.resultList.size)})</f:facet>
-    <div class="results" id="pescadoresList">
+							<div class="actionButtons">
+								<h:panelGrid columns="2">
+									<h:commandButton id="search" value="Buscar"
+										action="/PescadoresList.xhtml" />
+									<s:button id="reset" value="Todos" includePageParams="false" />
+								</h:panelGrid>
+							</div>
+						</h:panelGrid>
 
-    <h:outputText value="La busqueda no ha retornado resultados."
-               rendered="#{empty pescadoresList.resultList}"/>
 
-    <rich:dataTable id="pescadoresList"
-                var="_pescadores"
-              value="#{pescadoresList.resultList}"
-           rendered="#{not empty pescadoresList.resultList}">
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{pescadoresList}"/>
-                    <ui:param name="propertyLabel" value="Id"/>
-                    <ui:param name="propertyPath" value="pescadores.id"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_pescadores.id}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{pescadoresList}"/>
-                    <ui:param name="propertyLabel" value="Nro cedula"/>
-                    <ui:param name="propertyPath" value="pescadores.nroCedula"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_pescadores.nroCedula}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{pescadoresList}"/>
-                    <ui:param name="propertyLabel" value="Registro"/>
-                    <ui:param name="propertyPath" value="pescadores.registro"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_pescadores.registro}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{pescadoresList}"/>
-                    <ui:param name="propertyLabel" value="Nombre"/>
-                    <ui:param name="propertyPath" value="pescadores.nombre"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_pescadores.nombre}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{pescadoresList}"/>
-                    <ui:param name="propertyLabel" value="Apellido"/>
-                    <ui:param name="propertyPath" value="pescadores.apellido"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_pescadores.apellido}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{pescadoresList}"/>
-                    <ui:param name="propertyLabel" value="Asociacion"/>
-                    <ui:param name="propertyPath" value="pescadores.asociacion"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_pescadores.asociacion}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{pescadoresList}"/>
-                    <ui:param name="propertyLabel" value="Importe subsidio"/>
-                    <ui:param name="propertyPath" value="pescadores.importeSubsidio"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_pescadores.importeSubsidio}"/>
-        </h:column>
-     
-    </rich:dataTable>
+						<rich:panel>
+							<f:facet name="header">Resultados de la busqueda (#{empty pescadoresList.resultList ? 0 : (pescadoresList.paginated ? pescadoresList.resultCount : pescadoresList.resultList.size)})</f:facet>
+							<div class="results" id="pescadoresList">
 
-    </div>
-    </rich:panel>
+								<h:outputText value="La busqueda no ha retornado resultados."
+									rendered="#{empty pescadoresList.resultList}" />
 
-    <div class="tableControl">
+								<rich:dataTable id="pescadoresList" var="_pescadores"
+									value="#{pescadoresList.resultList}"
+									rendered="#{not empty pescadoresList.resultList}"
+									rowClasses="odd-row, even-row">
+									<h:column>
+										<f:facet name="header">
+											<ui:include src="layout/sort.xhtml">
+												<ui:param name="entityList" value="#{pescadoresList}" />
+												<ui:param name="propertyLabel" value="Id" />
+												<ui:param name="propertyPath" value="pescadores.id" />
+											</ui:include>
+										</f:facet>
+										<h:outputText value="#{_pescadores.id}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">
+											<ui:include src="layout/sort.xhtml">
+												<ui:param name="entityList" value="#{pescadoresList}" />
+												<ui:param name="propertyLabel" value="Nro cedula" />
+												<ui:param name="propertyPath" value="pescadores.nroCedula" />
+											</ui:include>
+										</f:facet>
+										<h:outputText value="#{_pescadores.nroCedula}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">
+											<ui:include src="layout/sort.xhtml">
+												<ui:param name="entityList" value="#{pescadoresList}" />
+												<ui:param name="propertyLabel" value="Registro" />
+												<ui:param name="propertyPath" value="pescadores.registro" />
+											</ui:include>
+										</f:facet>
+										<h:outputText value="#{_pescadores.registro}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">
+											<ui:include src="layout/sort.xhtml">
+												<ui:param name="entityList" value="#{pescadoresList}" />
+												<ui:param name="propertyLabel" value="Nombre" />
+												<ui:param name="propertyPath" value="pescadores.nombre" />
+											</ui:include>
+										</f:facet>
+										<h:outputText value="#{_pescadores.nombre}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">
+											<ui:include src="layout/sort.xhtml">
+												<ui:param name="entityList" value="#{pescadoresList}" />
+												<ui:param name="propertyLabel" value="Apellido" />
+												<ui:param name="propertyPath" value="pescadores.apellido" />
+											</ui:include>
+										</f:facet>
+										<h:outputText value="#{_pescadores.apellido}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">
+											<ui:include src="layout/sort.xhtml">
+												<ui:param name="entityList" value="#{pescadoresList}" />
+												<ui:param name="propertyLabel" value="Asociacion" />
+												<ui:param name="propertyPath" value="pescadores.asociacion" />
+											</ui:include>
+										</f:facet>
+										<h:outputText value="#{_pescadores.asociacion}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">
+											<ui:include src="layout/sort.xhtml">
+												<ui:param name="entityList" value="#{pescadoresList}" />
+												<ui:param name="propertyLabel" value="Importe subsidio" />
+												<ui:param name="propertyPath"
+													value="pescadores.importeSubsidio" />
+											</ui:include>
+										</f:facet>
+										<h:outputText value="#{_pescadores.importeSubsidio}" />
+									</h:column>
 
-        <s:link view="/PescadoresList.xhtml"
-            rendered="#{pescadoresList.previousExists}"
-               value="#{messages.left}#{messages.left} First Page"
-                  id="firstPage">
-          <f:param name="firstResult" value="0"/>
-        </s:link>
+								</rich:dataTable>
 
-        <s:link view="/PescadoresList.xhtml"
-            rendered="#{pescadoresList.previousExists}"
-               value="#{messages.left} Previous Page"
-                  id="previousPage">
-            <f:param name="firstResult"
-                    value="#{pescadoresList.previousFirstResult}"/>
-        </s:link>
+							</div>
+						</rich:panel>
 
-        <s:link view="/PescadoresList.xhtml"
-            rendered="#{pescadoresList.nextExists}"
-               value="Next Page #{messages.right}"
-                  id="nextPage">
-            <f:param name="firstResult"
-                    value="#{pescadoresList.nextFirstResult}"/>
-        </s:link>
+						<div class="tableControl">
 
-        <s:link view="/PescadoresList.xhtml"
-            rendered="#{pescadoresList.nextExists}"
-               value="Last Page #{messages.right}#{messages.right}"
-                  id="lastPage">
-            <f:param name="firstResult"
-                    value="#{pescadoresList.lastFirstResult}"/>
-        </s:link>
+							<s:link view="/PescadoresList.xhtml"
+								rendered="#{pescadoresList.previousExists}"
+								value="#{messages.left}#{messages.left} Primera Pagina"
+								id="firstPage">
+								<f:param name="firstResult" value="0" />
+							</s:link>
 
-    </div>
+							<s:link view="/PescadoresList.xhtml"
+								rendered="#{pescadoresList.previousExists}"
+								value="#{messages.left} Pagina Previa" id="previousPage">
+								<f:param name="firstResult"
+									value="#{pescadoresList.previousFirstResult}" />
+							</s:link>
 
-    
+							<s:link view="/PescadoresList.xhtml"
+								rendered="#{pescadoresList.nextExists}"
+								value="Pagina Siguiente #{messages.right}" id="nextPage">
+								<f:param name="firstResult"
+									value="#{pescadoresList.nextFirstResult}" />
+							</s:link>
 
-</ui:define>
+							<s:link view="/PescadoresList.xhtml"
+								rendered="#{pescadoresList.nextExists}"
+								value="Ultima Pagina #{messages.right}#{messages.right}"
+								id="lastPage">
+								<f:param name="firstResult"
+									value="#{pescadoresList.lastFirstResult}" />
+							</s:link>
+
+						</div>
+					</h:panelGrid>
+				</rich:tab>
+				<rich:tab header="Graficos" onheaderclick="load5()">
+					<span><h2>Pescadores - Cantidad de subsidio mensual
+							otorgado a los pescadores por asociacion</h2></span>
+					<div id="montosPescadores" style="height: 350px"></div>
+				</rich:tab>
+			</rich:tabPanel>
+
+
+
+		</h:form>
+
+	</ui:define>
 
 </ui:composition>

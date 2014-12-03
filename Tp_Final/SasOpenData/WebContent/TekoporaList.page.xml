@@ -11,7 +11,7 @@
    <param name="from"/>
    <param name="nroCedula" value="#{tekoporaList.tekopora.nroCedula}"/>
    <param name="nombre" value="#{tekoporaList.tekopora.nombre}"/>
-   <param name="departamento" value="#{tekoporaList.tekopora.departamento}"/>
+   <param name="departamento" value="#{tekoporaList.idDepartamento}"/>
    <param name="distrito" value="#{tekoporaList.tekopora.distrito}"/>
 
 </page>

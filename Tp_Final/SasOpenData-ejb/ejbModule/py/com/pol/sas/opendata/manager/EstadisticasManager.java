@@ -82,11 +82,36 @@ public class EstadisticasManager implements Serializable{
 			i++;
 		}
 	}
+	
+	public void tkh_terrenosPorDistrito2(){
+		data=null;
+//		if (departamento==null) {
+//			return;
+//		}
+		data=getTerrenosPorDistrito2();
+		treeMapDataArray= new TreeMapDto[data.size()];
+		int i=0;
+		for (Object[] _d : data) {
+			//treeMapData.add(new TreeMapDto((String)_d[0],(Long) _d[1]));
+			TreeMapDto dto= new TreeMapDto((String)_d[1],(Long) _d[2]);
+			dto.setGroup((String)_d[0]);
+			treeMapDataArray[i]=dto;
+			i++;
+		}
+	}
 	@SuppressWarnings("unchecked")
 	private List<Object[]> getTerrenosPorDistrito(Long depto) {
 		String hql="SELECT tkh.distrito,count(*) FROM Tekoha tkh WHERE tkh.departamento.idDepartamento=:depto GROUP BY tkh.distrito ORDER BY tkh.distrito";
 		Query q=entityManager.createQuery(hql);
 		q.setParameter("depto", depto);
+		return q.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	private List<Object[]> getTerrenosPorDistrito2() {
+		String hql="SELECT tkh.departamento.departamento,tkh.distrito,count(*) FROM Tekoha tkh  GROUP BY tkh.departamento.departamento,tkh.distrito ORDER BY tkh.distrito";
+		Query q=entityManager.createQuery(hql);
+		
 		return q.getResultList();
 	}
 
@@ -129,6 +154,23 @@ public class EstadisticasManager implements Serializable{
 		
 		
 	}
+	
+	public void tkp_montosPorDistrito2(){
+		data=null;
+		
+		data=getMontosPorDistrito2();
+		treeMapDataArray= new TreeMapDto[data.size()];
+		int i=0;
+		for (Object[] _d : data) {
+			//treeMapData.add(new TreeMapDto((String)_d[0],(Long) _d[1]));
+			TreeMapDto dto=new TreeMapDto((String)_d[1],((Double) _d[2]).longValue());
+			dto.setGroup((String)_d[0]);
+			treeMapDataArray[i]=dto;
+			i++;
+		}
+		
+		
+	}
 
 
 	
@@ -139,6 +181,15 @@ public class EstadisticasManager implements Serializable{
 		q.setParameter("depto", depto);
 		return q.getResultList();
 	}
+	
+	@SuppressWarnings("unchecked")
+	private List<Object[]> getMontosPorDistrito2() {
+		String hql="SELECT tkp.departamento.departamento,tkp.distrito, sum(tkp.importeMensual) FROM Tekopora tkp  GROUP BY tkp.departamento.departamento,tkp.distrito ORDER BY tkp.distrito";
+		Query q=entityManager.createQuery(hql);
+		
+		return q.getResultList();
+	}
+
 
 	
 	public void psc_MontosPorAsociacion(){
