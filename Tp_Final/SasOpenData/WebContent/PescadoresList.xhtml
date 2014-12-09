@@ -9,6 +9,11 @@
 	xmlns:a="http://richfaces.org/a4j" template="layout/template.xhtml">
 
 	<ui:define name="body">
+		<s:decorate template="/layout/title.xhtml">
+			<ui:define name="label">
+				Pescadores
+			</ui:define>
+		</s:decorate>
 		<script type="text/javascript"
 			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jquery.jqplot.js"></script>
 		<script type="text/javascript"
@@ -156,7 +161,7 @@
 											</f:facet>
 											<h:outputText value="#{_pescadores.nombre}" />
 										</rich:column>
-										<h:column>
+										<rich:column styleClass="left">
 											<f:facet name="header">
 												<ui:include src="layout/sort.xhtml">
 													<ui:param name="entityList" value="#{pescadoresList}" />
@@ -165,7 +170,7 @@
 												</ui:include>
 											</f:facet>
 											<h:outputText value="#{_pescadores.apellido}" />
-										</h:column>
+										</rich:column>
 										<h:column>
 											<f:facet name="header">
 												<ui:include src="layout/sort.xhtml">

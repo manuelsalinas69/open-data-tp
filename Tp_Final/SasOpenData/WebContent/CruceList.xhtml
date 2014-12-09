@@ -212,7 +212,7 @@
 										</f:facet>
 										<h:outputText value="#{_cruce.nroCedula}" />
 									</h:column>
-									<h:column>
+									<rich:column styleClass="left">
 										<f:facet name="header">
 											<ui:include src="layout/sort.xhtml">
 												<ui:param name="entityList" value="#{cruceList}" />
@@ -223,8 +223,8 @@
 											</ui:include>
 										</f:facet>
 										<h:outputText value="#{_cruce.departamento.departamento}" />
-									</h:column>
-									<h:column>
+									</rich:column>
+									<rich:column styleClass="left">
 										<f:facet name="header">
 											<ui:include src="layout/sort.xhtml">
 												<ui:param name="entityList" value="#{cruceList}" />
@@ -233,8 +233,8 @@
 											</ui:include>
 										</f:facet>
 										<h:outputText value="#{_cruce.nombreCompleto}" />
-									</h:column>
-									<h:column>
+									</rich:column>
+									<rich:column styleClass="left">
 										<f:facet name="header">
 											<ui:include src="layout/sort.xhtml">
 												<ui:param name="entityList" value="#{cruceList}" />
@@ -243,8 +243,8 @@
 											</ui:include>
 										</f:facet>
 										<h:outputText value="#{_cruce.distrito}" />
-									</h:column>
-									<h:column>
+									</rich:column>
+									<rich:column styleClass="center">
 										<f:facet name="header">
 											<ui:include src="layout/sort.xhtml">
 												<ui:param name="entityList" value="#{cruceList}" />
@@ -253,8 +253,8 @@
 											</ui:include>
 										</f:facet>
 										<h:outputText value="#{_cruce.tekopora}" />
-									</h:column>
-									<h:column>
+									</rich:column>
+									<rich:column styleClass="center">
 										<f:facet name="header">
 											<ui:include src="layout/sort.xhtml">
 												<ui:param name="entityList" value="#{cruceList}" />
@@ -263,8 +263,8 @@
 											</ui:include>
 										</f:facet>
 										<h:outputText value="#{_cruce.tekoha}" />
-									</h:column>
-									<h:column>
+									</rich:column>
+									<rich:column styleClass="center">
 										<f:facet name="header">
 											<ui:include src="layout/sort.xhtml">
 												<ui:param name="entityList" value="#{cruceList}" />
@@ -273,8 +273,8 @@
 											</ui:include>
 										</f:facet>
 										<h:outputText value="#{_cruce.pescador}" />
-									</h:column>
-									<h:column>
+									</rich:column>
+									<rich:column styleClass="center">
 										<f:facet name="header">
 											<ui:include src="layout/sort.xhtml">
 												<ui:param name="entityList" value="#{cruceList}" />
@@ -283,8 +283,8 @@
 											</ui:include>
 										</f:facet>
 										<h:outputText value="#{_cruce.esTitular}" />
-									</h:column>
-									<h:column>
+									</rich:column>
+									<rich:column styleClass="center">
 										<f:facet name="header">
 											<ui:include src="layout/sort.xhtml">
 												<ui:param name="entityList" value="#{cruceList}" />
@@ -293,7 +293,7 @@
 											</ui:include>
 										</f:facet>
 										<h:outputText value="#{_cruce.esConyuge}" />
-									</h:column>
+									</rich:column>
 									<h:column>
 										<f:facet name="header">
 											<ui:include src="layout/sort.xhtml">
@@ -324,7 +324,10 @@
 													value="cruce.importeMensualTekopra" />
 											</ui:include>
 										</f:facet>
-										<h:outputText value="#{_cruce.importeMensualTekopra}" />
+										<h:outputText value="#{_cruce.importeMensualTekopra}" >
+											<f:convertNumber currencySymbol="Gs." type="currency"
+													maxFractionDigits="0" locale="es_PY" />
+										</h:outputText>
 									</h:column>
 									<h:column>
 										<f:facet name="header">
@@ -336,9 +339,12 @@
 													value="cruce.importSubsidioPescadores" />
 											</ui:include>
 										</f:facet>
-										<h:outputText value="#{_cruce.importSubsidioPescadores}" />
+										<h:outputText value="#{_cruce.importSubsidioPescadores}" >
+											<f:convertNumber currencySymbol="Gs." type="currency"
+													maxFractionDigits="0" locale="es_PY" />
+										</h:outputText>
 									</h:column>
-									<h:column>
+									<rich:column styleClass="left">
 										<f:facet name="header">
 											<ui:include src="layout/sort.xhtml">
 												<ui:param name="entityList" value="#{cruceList}" />
@@ -348,7 +354,7 @@
 											</ui:include>
 										</f:facet>
 										<h:outputText value="#{_cruce.asociacionPescador}" />
-									</h:column>
+									</rich:column>
 
 								</rich:dataTable>
 

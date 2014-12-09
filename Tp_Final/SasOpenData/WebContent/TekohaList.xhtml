@@ -9,6 +9,11 @@
 	xmlns:a="http://richfaces.org/a4j" template="layout/template.xhtml">
 
 	<ui:define name="body">
+		<s:decorate template="/layout/title.xhtml">
+			<ui:define name="label">
+				Tekoha
+			</ui:define>
+		</s:decorate>
 		<script type="text/javascript"
 			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jquery.jqplot.js"></script>
 		<script type="text/javascript"
@@ -147,7 +152,7 @@
 												</f:facet>
 												<h:outputText value="#{_tekoha.nroCedulaTitular}" />
 											</h:column>
-											<h:column>
+											<rich:column styleClass="left">
 												<f:facet name="header">
 													<ui:include src="layout/sort.xhtml">
 														<ui:param name="entityList" value="#{tekohaList}" />
@@ -156,7 +161,7 @@
 													</ui:include>
 												</f:facet>
 												<h:outputText value="#{_tekoha.nombreTitular}" />
-											</h:column>
+											</rich:column>
 											<h:column>
 												<f:facet name="header">
 													<ui:include src="layout/sort.xhtml">
@@ -168,7 +173,7 @@
 												</f:facet>
 												<h:outputText value="#{_tekoha.nroCedulaConyuge}" />
 											</h:column>
-											<h:column>
+											<rich:column styleClass="left">
 												<f:facet name="header">
 													<ui:include src="layout/sort.xhtml">
 														<ui:param name="entityList" value="#{tekohaList}" />
@@ -177,8 +182,8 @@
 													</ui:include>
 												</f:facet>
 												<h:outputText value="#{_tekoha.nombreConyuge}" />
-											</h:column>
-											<h:column>
+											</rich:column>
+											<rich:column styleClass="left">
 												<f:facet name="header">
 													<ui:include src="layout/sort.xhtml">
 														<ui:param name="entityList" value="#{tekohaList}" />
@@ -188,8 +193,8 @@
 													</ui:include>
 												</f:facet>
 												<h:outputText value="#{_tekoha.departamento.departamento}" />
-											</h:column>
-											<h:column>
+											</rich:column>
+											<rich:column styleClass="left">
 												<f:facet name="header">
 													<ui:include src="layout/sort.xhtml">
 														<ui:param name="entityList" value="#{tekohaList}" />
@@ -198,8 +203,8 @@
 													</ui:include>
 												</f:facet>
 												<h:outputText value="#{_tekoha.distrito}" />
-											</h:column>
-											<h:column>
+											</rich:column>
+											<rich:column styleClass="left">
 												<f:facet name="header">
 													<ui:include src="layout/sort.xhtml">
 														<ui:param name="entityList" value="#{tekohaList}" />
@@ -209,7 +214,7 @@
 													</ui:include>
 												</f:facet>
 												<h:outputText value="#{_tekoha.territorioSocial}" />
-											</h:column>
+											</rich:column>
 
 
 										</rich:dataTable>

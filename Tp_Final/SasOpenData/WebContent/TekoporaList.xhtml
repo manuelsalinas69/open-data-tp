@@ -9,6 +9,11 @@
 	xmlns:a="http://richfaces.org/a4j" template="layout/template.xhtml">
 
 	<ui:define name="body">
+		<s:decorate template="/layout/title.xhtml">
+			<ui:define name="label">
+				Tekopora
+			</ui:define>
+		</s:decorate>
 		<script type="text/javascript"
 			src="#{facesContext.externalContext.requestContextPath}/javascript/jplot/jquery.jqplot.js"></script>
 		<script type="text/javascript"
@@ -65,7 +70,8 @@
 										<s:decorate template="layout/display.xhtml">
 											<ui:define name="label">Nombre</ui:define>
 											<h:inputText id="nombre"
-												value="#{tekoporaList.tekopora.nombre}" />
+												value="#{tekoporaList.tekopora.nombre}"
+												styleClass="align:left" />
 										</s:decorate>
 
 										<s:decorate template="layout/display.xhtml">
@@ -130,7 +136,7 @@
 											</f:facet>
 											<h:outputText value="#{_tekopora.nroCedula}" />
 										</h:column>
-										<h:column>
+										<rich:column styleClass="left">
 											<f:facet name="header">
 												<ui:include src="layout/sort.xhtml">
 													<ui:param name="entityList" value="#{tekoporaList}" />
@@ -139,8 +145,8 @@
 												</ui:include>
 											</f:facet>
 											<h:outputText value="#{_tekopora.nombre}" />
-										</h:column>
-										<h:column>
+										</rich:column>
+										<rich:column styleClass="left">
 											<f:facet name="header">
 												<ui:include src="layout/sort.xhtml">
 													<ui:param name="entityList" value="#{tekoporaList}" />
@@ -150,8 +156,8 @@
 												</ui:include>
 											</f:facet>
 											<h:outputText value="#{_tekopora.departamento.departamento}" />
-										</h:column>
-										<h:column>
+										</rich:column>
+										<rich:column styleClass="left">
 											<f:facet name="header">
 												<ui:include src="layout/sort.xhtml">
 													<ui:param name="entityList" value="#{tekoporaList}" />
@@ -160,7 +166,7 @@
 												</ui:include>
 											</f:facet>
 											<h:outputText value="#{_tekopora.distrito}" />
-										</h:column>
+										</rich:column>
 										<h:column>
 											<f:facet name="header">
 												<ui:include src="layout/sort.xhtml">
