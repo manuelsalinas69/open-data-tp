@@ -45,6 +45,22 @@ public class SelectItemsHelper implements Serializable {
 		return selectItems;
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Factory(value="departamentoSelectItemsAll",scope=ScopeType.PAGE,autoCreate=true)
+	public List<SelectItem> departamentoSelectItemsAll(){
+		String hql="SELECT _dep FROM Departamento _dep  ORDER BY _dep.idDepartamento ";
+		List<SelectItem> selectItems= new ArrayList<SelectItem>();
+		selectItems.add(new SelectItem(null, "Seleccione..."));
+		Query q=entityManager.createQuery(hql);
+		List<Departamento> l= q.getResultList();
+
+		for (Departamento dep : l) {
+			selectItems.add(new SelectItem(dep.getIdDepartamento(), dep.getDepartamento()));
+			
+		}
+		return selectItems;
+	}
+	
 //	@SuppressWarnings("unchecked")
 //	@Factory(value="departamento_1SelectItems",scope=ScopeType.PAGE,autoCreate=true)
 //	public List<SelectItem> departamento_1SelectItems(){

@@ -5,9 +5,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:rich="http://richfaces.org/rich" 
-	xmlns:a="http://richfaces.org/a4j"
-	template="layout/template.xhtml">
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a="http://richfaces.org/a4j" template="layout/template.xhtml">
 
 	<ui:define name="body">
 		<script type="text/javascript"
@@ -37,175 +36,192 @@
 		<script type="text/javascript"
 			src="#{facesContext.externalContext.requestContextPath}/javascript/utils/d3jsUtil.js"></script>
 
-		
-		
+
+
 		<link rel="stylesheet" type="text/css"
 			href="#{facesContext.externalContext.requestContextPath}/styles/jplot/jquery.jqplot.css" />
 		<h:form id="tekoporaSearch" styleClass="edit">
-			<a:jsFunction name="load3" action="#{estadisticasManager.tkp_montosPorDistrito2()}" execute="@this"
-				data="#{estadisticasManager.treeMapDataArray}" oncomplete="plotTreeMapGroup(event.data,'#montosPorDepto')"
-			/>
-			
+			<a:jsFunction name="load3"
+				action="#{estadisticasManager.tkp_montosPorDistrito2()}"
+				execute="@this" data="#{estadisticasManager.treeMapDataArray}"
+				oncomplete="plotTreeMapGroup(event.data,'#montosPorDepto')" />
+
 			<rich:tabPanel switchType="client">
 				<rich:tab header="Datos">
-					<h:panelGrid columns="2" columnClasses="top,top">
-						<h:panelGrid>
-							<rich:collapsiblePanel header="Filtros de Busqueda"
-								switchType="client"
-								>
+					<div >
 
-								<h:panelGrid columns="1">
-									<s:decorate template="layout/display.xhtml">
-										<ui:define name="label">Nro cedula</ui:define>
-										<h:inputText id="nroCedula"
-											value="#{tekoporaList.tekopora.nroCedula}" />
-									</s:decorate>
+						<h:panelGrid columns="2" columnClasses="top,top">
+							<h:panelGrid>
+								<rich:collapsiblePanel header="Filtros de Busqueda"
+									switchType="client" style="opacity: 1">
 
-									<s:decorate template="layout/display.xhtml">
-										<ui:define name="label">Nombre</ui:define>
-										<h:inputText id="nombre"
-											value="#{tekoporaList.tekopora.nombre}" />
-									</s:decorate>
+									<h:panelGrid columns="1">
+										<s:decorate template="layout/display.xhtml">
+											<ui:define name="label">Nro cedula</ui:define>
+											<h:inputText id="nroCedula"
+												value="#{tekoporaList.tekopora.nroCedula}" />
+										</s:decorate>
 
-									<s:decorate template="layout/display.xhtml">
-										<ui:define name="label">Departamento</ui:define>
-										<h:selectOneMenu id="departamento"
-											value="#{tekoporaList.idDepartamento}" >
-											<f:selectItems value="#{departamentoSelectItems}"/>
-										</h:selectOneMenu>
-									</s:decorate>
+										<s:decorate template="layout/display.xhtml">
+											<ui:define name="label">Nombre</ui:define>
+											<h:inputText id="nombre"
+												value="#{tekoporaList.tekopora.nombre}" />
+										</s:decorate>
 
-									<s:decorate template="layout/display.xhtml">
-										<ui:define name="label">Distrito</ui:define>
-										<h:inputText id="distrito"
-											value="#{tekoporaList.tekopora.distrito}" />
-									</s:decorate>
-								</h:panelGrid>
+										<s:decorate template="layout/display.xhtml">
+											<ui:define name="label">Departamento</ui:define>
+											<h:selectOneMenu id="departamento"
+												value="#{tekoporaList.idDepartamento}">
+												<f:selectItems value="#{departamentoSelectItemsAll}" />
+											</h:selectOneMenu>
+										</s:decorate>
+
+										<s:decorate template="layout/display.xhtml">
+											<ui:define name="label">Distrito</ui:define>
+											<h:inputText id="distrito"
+												value="#{tekoporaList.tekopora.distrito}" />
+										</s:decorate>
+
+										<div class="actionButtons">
+											<h:panelGrid columns="2">
+												<h:commandButton id="search" value="Buscar"
+													action="/TekoporaList.xhtml" />
+												<s:button id="reset" value="Todos" includePageParams="false" />
+											</h:panelGrid>
+										</div>
+									</h:panelGrid>
 
 
 
-							</rich:collapsiblePanel>
+								</rich:collapsiblePanel>
 
-							<div class="actionButtons">
-								<h:panelGrid columns="2">
-									<h:commandButton id="search" value="Buscar"
-										action="/TekoporaList.xhtml" />
-									<s:button id="reset" value="Todos" includePageParams="false" />
-								</h:panelGrid>
-							</div>
+								<rich:panel>
+										<div style="opacity:0.1;position:relative;top:50%;left:10%;float: center;">
+											<h:graphicImage value="/img/csv.png" />
+										</div>
+										<h:commandButton  action="#{exportManager.exportTkp()}" value="Descargar datos" style="position:relative;top:50%;left:10%"/>
+										
+									
+								</rich:panel>
+								
+							</h:panelGrid>
+
+
+
+							<rich:panel>
+								<f:facet name="header">Resultados de la busqueda (#{empty tekoporaList.resultList ? 0 : (tekoporaList.paginated ? tekoporaList.resultCount : tekoporaList.resultList.size)})</f:facet>
+								<div class="results" id="tekoporaList">
+
+									<h:outputText value="La busqueda no ha retornado resultados."
+										rendered="#{empty tekoporaList.resultList}" />
+
+									<rich:dataTable id="tekoporaList" var="_tekopora"
+										value="#{tekoporaList.resultList}"
+										rendered="#{not empty tekoporaList.resultList}"
+										rowClasses="odd-row, even-row">
+
+										<h:column>
+											<f:facet name="header">
+												<ui:include src="layout/sort.xhtml">
+													<ui:param name="entityList" value="#{tekoporaList}" />
+													<ui:param name="propertyLabel" value="Nro cedula" />
+													<ui:param name="propertyPath" value="tekopora.nroCedula" />
+												</ui:include>
+											</f:facet>
+											<h:outputText value="#{_tekopora.nroCedula}" />
+										</h:column>
+										<h:column>
+											<f:facet name="header">
+												<ui:include src="layout/sort.xhtml">
+													<ui:param name="entityList" value="#{tekoporaList}" />
+													<ui:param name="propertyLabel" value="Nombre" />
+													<ui:param name="propertyPath" value="tekopora.nombre" />
+												</ui:include>
+											</f:facet>
+											<h:outputText value="#{_tekopora.nombre}" />
+										</h:column>
+										<h:column>
+											<f:facet name="header">
+												<ui:include src="layout/sort.xhtml">
+													<ui:param name="entityList" value="#{tekoporaList}" />
+													<ui:param name="propertyLabel" value="Departamento" />
+													<ui:param name="propertyPath"
+														value="tekopora.departamento.departamento" />
+												</ui:include>
+											</f:facet>
+											<h:outputText value="#{_tekopora.departamento.departamento}" />
+										</h:column>
+										<h:column>
+											<f:facet name="header">
+												<ui:include src="layout/sort.xhtml">
+													<ui:param name="entityList" value="#{tekoporaList}" />
+													<ui:param name="propertyLabel" value="Distrito" />
+													<ui:param name="propertyPath" value="tekopora.distrito" />
+												</ui:include>
+											</f:facet>
+											<h:outputText value="#{_tekopora.distrito}" />
+										</h:column>
+										<h:column>
+											<f:facet name="header">
+												<ui:include src="layout/sort.xhtml">
+													<ui:param name="entityList" value="#{tekoporaList}" />
+													<ui:param name="propertyLabel" value="Importe mensual" />
+													<ui:param name="propertyPath"
+														value="tekopora.importeMensual" />
+												</ui:include>
+											</f:facet>
+											<h:outputText value="#{_tekopora.importeMensual}">
+												<f:convertNumber currencySymbol="Gs." type="currency"
+													maxFractionDigits="0" locale="es_PY" />
+											</h:outputText>
+										</h:column>
+
+									</rich:dataTable>
+
+								</div>
+								<div class="tableControl">
+
+									<s:link view="/TekoporaList.xhtml"
+										rendered="#{tekoporaList.previousExists}"
+										value="#{messages.left}#{messages.left} Primera Pagina"
+										id="firstPage">
+										<f:param name="firstResult" value="0" />
+									</s:link>
+
+									<s:link view="/TekoporaList.xhtml"
+										rendered="#{tekoporaList.previousExists}"
+										value="#{messages.left} Pagina Previa" id="previousPage">
+										<f:param name="firstResult"
+											value="#{tekoporaList.previousFirstResult}" />
+									</s:link>
+
+									<s:link view="/TekoporaList.xhtml"
+										rendered="#{tekoporaList.nextExists}"
+										value="Pagina Siguiente #{messages.right}" id="nextPage">
+										<f:param name="firstResult"
+											value="#{tekoporaList.nextFirstResult}" />
+									</s:link>
+
+									<s:link view="/TekoporaList.xhtml"
+										rendered="#{tekoporaList.nextExists}"
+										value="Ultima Pagina #{messages.right}#{messages.right}"
+										id="lastPage">
+										<f:param name="firstResult"
+											value="#{tekoporaList.lastFirstResult}" />
+									</s:link>
+
+								</div>
+							</rich:panel>
+							<!-- 						<h:graphicImage value="/img/tkp.jpg" style="opacity:0.4"/> -->
+
 						</h:panelGrid>
-
-
-
-						<rich:panel>
-							<f:facet name="header">Resultados de la busqueda (#{empty tekoporaList.resultList ? 0 : (tekoporaList.paginated ? tekoporaList.resultCount : tekoporaList.resultList.size)})</f:facet>
-							<div class="results" id="tekoporaList">
-
-								<h:outputText value="La busqueda no ha retornado resultados."
-									rendered="#{empty tekoporaList.resultList}" />
-
-								<rich:dataTable id="tekoporaList" var="_tekopora"
-									value="#{tekoporaList.resultList}"
-									rendered="#{not empty tekoporaList.resultList}"
-									rowClasses="odd-row, even-row">
-
-									<h:column>
-										<f:facet name="header">
-											<ui:include src="layout/sort.xhtml">
-												<ui:param name="entityList" value="#{tekoporaList}" />
-												<ui:param name="propertyLabel" value="Nro cedula" />
-												<ui:param name="propertyPath" value="tekopora.nroCedula" />
-											</ui:include>
-										</f:facet>
-										<h:outputText value="#{_tekopora.nroCedula}" />
-									</h:column>
-									<h:column>
-										<f:facet name="header">
-											<ui:include src="layout/sort.xhtml">
-												<ui:param name="entityList" value="#{tekoporaList}" />
-												<ui:param name="propertyLabel" value="Nombre" />
-												<ui:param name="propertyPath" value="tekopora.nombre" />
-											</ui:include>
-										</f:facet>
-										<h:outputText value="#{_tekopora.nombre}" />
-									</h:column>
-									<h:column>
-										<f:facet name="header">
-											<ui:include src="layout/sort.xhtml">
-												<ui:param name="entityList" value="#{tekoporaList}" />
-												<ui:param name="propertyLabel" value="Departamento" />
-												<ui:param name="propertyPath"
-													value="tekopora.departamento.departamento" />
-											</ui:include>
-										</f:facet>
-										<h:outputText value="#{_tekopora.departamento.departamento}" />
-									</h:column>
-									<h:column>
-										<f:facet name="header">
-											<ui:include src="layout/sort.xhtml">
-												<ui:param name="entityList" value="#{tekoporaList}" />
-												<ui:param name="propertyLabel" value="Distrito" />
-												<ui:param name="propertyPath" value="tekopora.distrito" />
-											</ui:include>
-										</f:facet>
-										<h:outputText value="#{_tekopora.distrito}" />
-									</h:column>
-									<h:column>
-										<f:facet name="header">
-											<ui:include src="layout/sort.xhtml">
-												<ui:param name="entityList" value="#{tekoporaList}" />
-												<ui:param name="propertyLabel" value="Importe mensual" />
-												<ui:param name="propertyPath"
-													value="tekopora.importeMensual" />
-											</ui:include>
-										</f:facet>
-										<h:outputText value="#{_tekopora.importeMensual}" />
-									</h:column>
-
-								</rich:dataTable>
-
-							</div>
-							<div class="tableControl">
-
-								<s:link view="/TekoporaList.xhtml"
-									rendered="#{tekoporaList.previousExists}"
-									value="#{messages.left}#{messages.left} Primera Pagina"
-									id="firstPage">
-									<f:param name="firstResult" value="0" />
-								</s:link>
-
-								<s:link view="/TekoporaList.xhtml"
-									rendered="#{tekoporaList.previousExists}"
-									value="#{messages.left} Pagina Previa" id="previousPage">
-									<f:param name="firstResult"
-										value="#{tekoporaList.previousFirstResult}" />
-								</s:link>
-
-								<s:link view="/TekoporaList.xhtml"
-									rendered="#{tekoporaList.nextExists}"
-									value="Pagina Siguiente #{messages.right}" id="nextPage">
-									<f:param name="firstResult"
-										value="#{tekoporaList.nextFirstResult}" />
-								</s:link>
-
-								<s:link view="/TekoporaList.xhtml"
-									rendered="#{tekoporaList.nextExists}"
-									value="Ultima Pagina #{messages.right}#{messages.right}"
-									id="lastPage">
-									<f:param name="firstResult"
-										value="#{tekoporaList.lastFirstResult}" />
-								</s:link>
-
-							</div>
-						</rich:panel>
-
-
-					</h:panelGrid>
+					</div>
 
 
 				</rich:tab>
 				<rich:tab header="Graficos" onheaderclick="load3()">
-					<span><h2>Tekopora - Cantidad de aporte mensual otorgado por departamento</h2></span>
+					<span><h2>Tekopora - Cantidad de aporte mensual
+							otorgado por departamento</h2></span>
 					<div id="montosPorDepto" style="height: 350px"></div>
 				</rich:tab>
 

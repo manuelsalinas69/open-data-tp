@@ -1521,7 +1521,7 @@ a.historialClass {
 }
 
 *.rf-cp-b {
-	color: #fff;
+	color: #5f5f5f;
 	font-size: 10px;
 /*	font-family: "Open Sans";*/
 }
@@ -1648,9 +1648,12 @@ background-image: url(../img/chevronDown.png);
 	background-position: top;
 	background-repeat: repeat-x;
 	background-color: #fff;
-	cursor: pointer; background-position : top; background-repeat :
-	repeat-x; background-color : #fff;
+	cursor: pointer;/* background-position : top; background-repeat :
+	repeat-x; background-color : #fff;*/
 	color: #333;
+	-moz-border-radius: 3px 3px 0px 0px;
+	-webkit-border-radius: 3px 3px 0px 0px;
+	border-radius: 3px 3px 0px 0px; 
 }
 
 *.rf-tab-hdr-act.rf-tab-hdr-btm {
@@ -1658,23 +1661,25 @@ background-image: url(../img/chevronDown.png);
 	border-top: 0px;
 	font-weight: bold;
 	vertical-align: bottom;
-	background-image: none; background-position : top;
-	background-repeat: repeat-x;
-	background-color: #fff;
+	/*background-image: none; background-position : top;
+	background-repeat: repeat-x;*/
+	background-color: #D94545;
+	color: #fff;
 	cursor: default;
 	background-position: top;
 }
 
 *.rf-tab-hdr-act.rf-tab-hdr-top {
-	padding: 0px 5px 3px 5px;
+	padding: 2px 5px 3px 5px;
 	border-bottom: 0px;
-	border-top:1px solid #00688B;
+	/*border-top:1px solid #00688B;*/
 	font-weight: bold;
 	font-size:14px;
 	vertical-align: top;
 	background-image: none; background-position : top;
 	background-repeat: repeat-x;
-	background-color: #fff;
+	background-color: #D94545;
+	color: #fff;
 	cursor: default;
 	background-position: top;
 }
@@ -1687,7 +1692,7 @@ background-image: url(../img/chevronDown.png);
 
 *.rf-tab-hdr-inact.rf-tab-hdr-top {
 	vertical-align: top;
-	padding: 0px 5px 3px 5px;
+	padding: 2px 5px 3px 5px;
 	background-image: none;
 }
 
@@ -1739,8 +1744,9 @@ background-image: url(../img/chevronDown.png);
 }
 
 *.rf-tab-lbl {
+	margin-top: 5px;
 	white-space: nowrap;
-	font-family: "Open Sans", sans-serif;
+	/*font-family: "Open Sans", sans-serif;*/
 	font-size: 11px;
 }
 
@@ -1801,8 +1807,9 @@ background-image: url(../img/chevronDown.png);
 
 
 *.rf-tab-cnt {
-	border: 1px solid #dedede;
-	font-family: "Open Sans", sans-serif;
+	border: 0px solid #dedede;
+	border-top: 1px solid #dedede;
+	/*font-family: "Open Sans", sans-serif;*/
 	font-size: 10px;
 	padding: 10px;
 	background: #FFFFFF;
@@ -2045,4 +2052,27 @@ textarea[disabled], input[type="text"][disabled], input[type="password"][disable
 
 tr.rf-dt-r:HOVER {
 	background-color: #E6E6E6;
+}
+
+
+.venntooltip {
+  position: absolute;
+  text-align: center;
+  vertical-align: middle;
+  width: 128px;
+  height: 30px;
+  background: #fff;
+  color: #808285;
+  padding: 5px;
+  border: 1px solid #dedede;
+  border-radius: 4px;
+  opacity: 0;
+}
+
+.imgBtn{
+	opacity: 0.1; 
+	position: relative; 
+	top: 50%; 
+	left: 10%; 
+	float: center;
 }

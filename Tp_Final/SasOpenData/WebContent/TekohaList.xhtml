@@ -36,221 +36,232 @@
 		<script type="text/javascript"
 			src="#{facesContext.externalContext.requestContextPath}/javascript/utils/d3jsUtil.js"></script>
 
-		
+
 		<h:form>
 			<!-- Functions -->
-			<a:jsFunction name="load1"
-				action="#{estadisticasManager.tkh_terrenosPorDistrito2()}"
-				execute="@this" data="#{estadisticasManager.treeMapDataArray}"
-				oncomplete="plotTreeMapGroup(event.data,'#terrenoPorDepto')" />
+			<div>
+				<a:jsFunction name="load1"
+					action="#{estadisticasManager.tkh_terrenosPorDistrito2()}"
+					execute="@this" data="#{estadisticasManager.treeMapDataArray}"
+					oncomplete="plotTreeMapGroup(event.data,'#terrenoPorDepto')" />
 
 
-			<link rel="stylesheet" type="text/css"
-				href="#{facesContext.externalContext.requestContextPath}/styles/jplot/jquery.jqplot.css" />
-			<rich:tabPanel switchType="client">
-				<rich:tab header="Datos">
-					<h:panelGrid columns="2" columnClasses="top,top">
+				<link rel="stylesheet" type="text/css"
+					href="#{facesContext.externalContext.requestContextPath}/styles/jplot/jquery.jqplot.css" />
+				<rich:tabPanel switchType="client">
+					<rich:tab header="Datos">
+						<div >
 
-						<h:panelGrid>
+							<h:panelGrid columns="2" columnClasses="top,top">
 
-							<rich:collapsiblePanel header="Filtros de Busqueda"
-								switchType="client">
+								<h:panelGrid>
 
-								<h:panelGrid columns="1">
-									<s:decorate template="layout/display.xhtml">
-										<ui:define name="label">Nro cedula titular</ui:define>
-										<h:inputText id="nroCedulaTitular"
-											value="#{tekohaList.tekoha.nroCedulaTitular}" />
-									</s:decorate>
+									<rich:collapsiblePanel header="Filtros de Busqueda"
+										switchType="client">
 
-									<s:decorate template="layout/display.xhtml">
-										<ui:define name="label">Nombre titular</ui:define>
-										<h:inputText id="nombreTitular"
-											value="#{tekohaList.tekoha.nombreTitular}" />
-									</s:decorate>
+										<h:panelGrid columns="1">
+											<s:decorate template="layout/display.xhtml">
+												<ui:define name="label">Nro cedula titular</ui:define>
+												<h:inputText id="nroCedulaTitular"
+													value="#{tekohaList.tekoha.nroCedulaTitular}" />
+											</s:decorate>
 
-									<s:decorate template="layout/display.xhtml">
-										<ui:define name="label">Nro cedula conyuge</ui:define>
-										<h:inputText id="nroCedulaConyuge"
-											value="#{tekohaList.tekoha.nroCedulaConyuge}" />
-									</s:decorate>
+											<s:decorate template="layout/display.xhtml">
+												<ui:define name="label">Nombre titular</ui:define>
+												<h:inputText id="nombreTitular"
+													value="#{tekohaList.tekoha.nombreTitular}" />
+											</s:decorate>
 
-									<s:decorate template="layout/display.xhtml">
-										<ui:define name="label">Nombre conyuge</ui:define>
-										<h:inputText id="nombreConyuge"
-											value="#{tekohaList.tekoha.nombreConyuge}" />
-									</s:decorate>
+											<s:decorate template="layout/display.xhtml">
+												<ui:define name="label">Nro cedula conyuge</ui:define>
+												<h:inputText id="nroCedulaConyuge"
+													value="#{tekohaList.tekoha.nroCedulaConyuge}" />
+											</s:decorate>
 
-									<s:decorate template="layout/display.xhtml">
-										<ui:define name="label">Departamento</ui:define>
-										<h:selectOneMenu id="departamento"
-											value="#{tekohaList.idDepartamento}">
-											<f:selectItems value="#{departamentoSelectItems}" />
-										</h:selectOneMenu>
-									</s:decorate>
+											<s:decorate template="layout/display.xhtml">
+												<ui:define name="label">Nombre conyuge</ui:define>
+												<h:inputText id="nombreConyuge"
+													value="#{tekohaList.tekoha.nombreConyuge}" />
+											</s:decorate>
 
-									<s:decorate template="layout/display.xhtml">
-										<ui:define name="label">Distrito</ui:define>
-										<h:inputText id="distrito"
-											value="#{tekohaList.tekoha.distrito}" />
-									</s:decorate>
+											<s:decorate template="layout/display.xhtml">
+												<ui:define name="label">Departamento</ui:define>
+												<h:selectOneMenu id="departamento"
+													value="#{tekohaList.idDepartamento}">
+													<f:selectItems value="#{departamentoSelectItemsAll}" />
+												</h:selectOneMenu>
+											</s:decorate>
 
+											<s:decorate template="layout/display.xhtml">
+												<ui:define name="label">Distrito</ui:define>
+												<h:inputText id="distrito"
+													value="#{tekohaList.tekoha.distrito}" />
+											</s:decorate>
+
+											<div class="actionButtons">
+												<h:panelGrid columns="2">
+													<h:commandButton id="search" value="Buscar"
+														action="/TekohaList.xhtml" />
+													<s:button id="reset" value="Todos"
+														includePageParams="false" />
+												</h:panelGrid>
+											</div>
+										</h:panelGrid>
+
+
+
+									</rich:collapsiblePanel>
+
+								<rich:panel>
+										<div style="opacity:0.1;position:relative;top:50%;left:10%;float: center;">
+											<h:graphicImage value="/img/csv.png" />
+										</div>
+										<h:commandButton  action="#{exportManager.exportTkh()}" value="Descargar datos" style="position:relative;top:50%;left:10%"/>
+										
+									
+								</rich:panel>
 
 								</h:panelGrid>
 
 
+								<rich:panel>
+									<f:facet name="header">Resultados de la busqueda (#{empty tekohaList.resultList ? 0 : (tekohaList.paginated ? tekohaList.resultCount : tekohaList.resultList.size)})</f:facet>
+									<div class="results" id="tekohaList">
 
-							</rich:collapsiblePanel>
+										<h:outputText value="La busqueda no ha retornado resultados."
+											rendered="#{empty tekohaList.resultList}" />
 
-							<div class="actionButtons">
-								<h:panelGrid columns="2">
-									<h:commandButton id="search" value="Buscar"
-										action="/TekohaList.xhtml" />
-									<s:button id="reset" value="Todos" includePageParams="false" />
-								</h:panelGrid>
-							</div>
+										<rich:dataTable id="tekohaList" var="_tekoha"
+											value="#{tekohaList.resultList}"
+											rendered="#{not empty tekohaList.resultList}"
+											rowClasses="odd-row, even-row">
 
-						</h:panelGrid>
-
-
-						<rich:panel>
-							<f:facet name="header">Resultados de la busqueda (#{empty tekohaList.resultList ? 0 : (tekohaList.paginated ? tekohaList.resultCount : tekohaList.resultList.size)})</f:facet>
-							<div class="results" id="tekohaList">
-
-								<h:outputText value="La busqueda no ha retornado resultados."
-									rendered="#{empty tekohaList.resultList}" />
-
-								<rich:dataTable id="tekohaList" var="_tekoha"
-									value="#{tekohaList.resultList}"
-									rendered="#{not empty tekohaList.resultList}"
-									rowClasses="odd-row, even-row">
-
-									<h:column>
-										<f:facet name="header">
-											<ui:include src="layout/sort.xhtml">
-												<ui:param name="entityList" value="#{tekohaList}" />
-												<ui:param name="propertyLabel" value="Nro cedula titular" />
-												<ui:param name="propertyPath"
-													value="tekoha.nroCedulaTitular" />
-											</ui:include>
-										</f:facet>
-										<h:outputText value="#{_tekoha.nroCedulaTitular}" />
-									</h:column>
-									<h:column>
-										<f:facet name="header">
-											<ui:include src="layout/sort.xhtml">
-												<ui:param name="entityList" value="#{tekohaList}" />
-												<ui:param name="propertyLabel" value="Nombre titular" />
-												<ui:param name="propertyPath" value="tekoha.nombreTitular" />
-											</ui:include>
-										</f:facet>
-										<h:outputText value="#{_tekoha.nombreTitular}" />
-									</h:column>
-									<h:column>
-										<f:facet name="header">
-											<ui:include src="layout/sort.xhtml">
-												<ui:param name="entityList" value="#{tekohaList}" />
-												<ui:param name="propertyLabel" value="Nro cedula conyuge" />
-												<ui:param name="propertyPath"
-													value="tekoha.nroCedulaConyuge" />
-											</ui:include>
-										</f:facet>
-										<h:outputText value="#{_tekoha.nroCedulaConyuge}" />
-									</h:column>
-									<h:column>
-										<f:facet name="header">
-											<ui:include src="layout/sort.xhtml">
-												<ui:param name="entityList" value="#{tekohaList}" />
-												<ui:param name="propertyLabel" value="Nombre conyuge" />
-												<ui:param name="propertyPath" value="tekoha.nombreConyuge" />
-											</ui:include>
-										</f:facet>
-										<h:outputText value="#{_tekoha.nombreConyuge}" />
-									</h:column>
-									<h:column>
-										<f:facet name="header">
-											<ui:include src="layout/sort.xhtml">
-												<ui:param name="entityList" value="#{tekohaList}" />
-												<ui:param name="propertyLabel" value="Departamento" />
-												<ui:param name="propertyPath"
-													value="tekoha.departamento.departamento" />
-											</ui:include>
-										</f:facet>
-										<h:outputText value="#{_tekoha.departamento.departamento}" />
-									</h:column>
-									<h:column>
-										<f:facet name="header">
-											<ui:include src="layout/sort.xhtml">
-												<ui:param name="entityList" value="#{tekohaList}" />
-												<ui:param name="propertyLabel" value="Distrito" />
-												<ui:param name="propertyPath" value="tekoha.distrito" />
-											</ui:include>
-										</f:facet>
-										<h:outputText value="#{_tekoha.distrito}" />
-									</h:column>
-									<h:column>
-										<f:facet name="header">
-											<ui:include src="layout/sort.xhtml">
-												<ui:param name="entityList" value="#{tekohaList}" />
-												<ui:param name="propertyLabel" value="Territorio social" />
-												<ui:param name="propertyPath"
-													value="tekoha.territorioSocial" />
-											</ui:include>
-										</f:facet>
-										<h:outputText value="#{_tekoha.territorioSocial}" />
-									</h:column>
+											<h:column>
+												<f:facet name="header">
+													<ui:include src="layout/sort.xhtml">
+														<ui:param name="entityList" value="#{tekohaList}" />
+														<ui:param name="propertyLabel" value="Nro cedula titular" />
+														<ui:param name="propertyPath"
+															value="tekoha.nroCedulaTitular" />
+													</ui:include>
+												</f:facet>
+												<h:outputText value="#{_tekoha.nroCedulaTitular}" />
+											</h:column>
+											<h:column>
+												<f:facet name="header">
+													<ui:include src="layout/sort.xhtml">
+														<ui:param name="entityList" value="#{tekohaList}" />
+														<ui:param name="propertyLabel" value="Nombre titular" />
+														<ui:param name="propertyPath" value="tekoha.nombreTitular" />
+													</ui:include>
+												</f:facet>
+												<h:outputText value="#{_tekoha.nombreTitular}" />
+											</h:column>
+											<h:column>
+												<f:facet name="header">
+													<ui:include src="layout/sort.xhtml">
+														<ui:param name="entityList" value="#{tekohaList}" />
+														<ui:param name="propertyLabel" value="Nro cedula conyuge" />
+														<ui:param name="propertyPath"
+															value="tekoha.nroCedulaConyuge" />
+													</ui:include>
+												</f:facet>
+												<h:outputText value="#{_tekoha.nroCedulaConyuge}" />
+											</h:column>
+											<h:column>
+												<f:facet name="header">
+													<ui:include src="layout/sort.xhtml">
+														<ui:param name="entityList" value="#{tekohaList}" />
+														<ui:param name="propertyLabel" value="Nombre conyuge" />
+														<ui:param name="propertyPath" value="tekoha.nombreConyuge" />
+													</ui:include>
+												</f:facet>
+												<h:outputText value="#{_tekoha.nombreConyuge}" />
+											</h:column>
+											<h:column>
+												<f:facet name="header">
+													<ui:include src="layout/sort.xhtml">
+														<ui:param name="entityList" value="#{tekohaList}" />
+														<ui:param name="propertyLabel" value="Departamento" />
+														<ui:param name="propertyPath"
+															value="tekoha.departamento.departamento" />
+													</ui:include>
+												</f:facet>
+												<h:outputText value="#{_tekoha.departamento.departamento}" />
+											</h:column>
+											<h:column>
+												<f:facet name="header">
+													<ui:include src="layout/sort.xhtml">
+														<ui:param name="entityList" value="#{tekohaList}" />
+														<ui:param name="propertyLabel" value="Distrito" />
+														<ui:param name="propertyPath" value="tekoha.distrito" />
+													</ui:include>
+												</f:facet>
+												<h:outputText value="#{_tekoha.distrito}" />
+											</h:column>
+											<h:column>
+												<f:facet name="header">
+													<ui:include src="layout/sort.xhtml">
+														<ui:param name="entityList" value="#{tekohaList}" />
+														<ui:param name="propertyLabel" value="Territorio social" />
+														<ui:param name="propertyPath"
+															value="tekoha.territorioSocial" />
+													</ui:include>
+												</f:facet>
+												<h:outputText value="#{_tekoha.territorioSocial}" />
+											</h:column>
 
 
-								</rich:dataTable>
+										</rich:dataTable>
 
-							</div>
-							<div class="tableControl">
+									</div>
+									<div class="tableControl">
 
-								<s:link view="/TekohaList.xhtml"
-									rendered="#{tekohaList.previousExists}"
-									value="#{messages.left}#{messages.left} Primera Pagina"
-									id="firstPage">
-									<f:param name="firstResult" value="0" />
-								</s:link>
+										<s:link view="/TekohaList.xhtml"
+											rendered="#{tekohaList.previousExists}"
+											value="#{messages.left}#{messages.left} Primera Pagina"
+											id="firstPage">
+											<f:param name="firstResult" value="0" />
+										</s:link>
 
-								<s:link view="/TekohaList.xhtml"
-									rendered="#{tekohaList.previousExists}"
-									value="#{messages.left} Pagina Previa" id="previousPage">
-									<f:param name="firstResult"
-										value="#{tekohaList.previousFirstResult}" />
-								</s:link>
+										<s:link view="/TekohaList.xhtml"
+											rendered="#{tekohaList.previousExists}"
+											value="#{messages.left} Pagina Previa" id="previousPage">
+											<f:param name="firstResult"
+												value="#{tekohaList.previousFirstResult}" />
+										</s:link>
 
-								<s:link view="/TekohaList.xhtml"
-									rendered="#{tekohaList.nextExists}"
-									value="Pagina Siguiente #{messages.right}" id="nextPage">
-									<f:param name="firstResult"
-										value="#{tekohaList.nextFirstResult}" />
-								</s:link>
+										<s:link view="/TekohaList.xhtml"
+											rendered="#{tekohaList.nextExists}"
+											value="Pagina Siguiente #{messages.right}" id="nextPage">
+											<f:param name="firstResult"
+												value="#{tekohaList.nextFirstResult}" />
+										</s:link>
 
-								<s:link view="/TekohaList.xhtml"
-									rendered="#{tekohaList.nextExists}"
-									value="Ultima pagina #{messages.right}#{messages.right}"
-									id="lastPage">
-									<f:param name="firstResult"
-										value="#{tekohaList.lastFirstResult}" />
-								</s:link>
+										<s:link view="/TekohaList.xhtml"
+											rendered="#{tekohaList.nextExists}"
+											value="Ultima pagina #{messages.right}#{messages.right}"
+											id="lastPage">
+											<f:param name="firstResult"
+												value="#{tekohaList.lastFirstResult}" />
+										</s:link>
 
-							</div>
-						</rich:panel>
-					</h:panelGrid>
+									</div>
+								</rich:panel>
+							</h:panelGrid>
 
+						</div>
 
+					</rich:tab>
+					<rich:tab header="Graficos" onheaderclick="load1()">
+						<span><h2>Tekoha - Cantidad de terrenos otorgados por
+								departamento</h2></span>
+						<div id="terrenoPorDepto" style="height: 350px"></div>
+					</rich:tab>
 
-				</rich:tab>
-				<rich:tab header="Graficos" onheaderclick="load1()">
-					<span><h2>Tekoha - Cantidad de terrenos otorgados por
-							departamento</h2></span>
-					<div id="terrenoPorDepto" style="height: 350px"></div>
-				</rich:tab>
+				</rich:tabPanel>
 
-			</rich:tabPanel>
-
-
+			</div>
 		</h:form>
 
 	</ui:define>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.org/schema/seam/pages"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://jboss.org/schema/seam/pages http://jboss.org/schema/seam/pages-2.3.xsd">
+
+   <param name="firstResult" value="#{cruceList.firstResult}"/>
+   <param name="sort" value="#{cruceList.orderColumn}"/>
+   <param name="dir" value="#{cruceList.orderDirection}"/>
+   <param name="logic" value="#{cruceList.restrictionLogicOperator}"/>
+
+   <param name="from"/>
+   <param name="nroCedula" value="#{cruceList.cruce.nroCedula}"/>
+   <param name="nombreCompleto" value="#{cruceList.cruce.nombreCompleto}"/>
+   <param name="distrito" value="#{cruceList.cruce.distrito}"/>
+   <param name="tekopora" value="#{cruceList.tekopora}"/>
+   <param name="tekoha" value="#{cruceList.tekoha}"/>
+   <param name="pescador" value="#{cruceList.pescador}"/>
+   <param name="esTitular" value="#{cruceList.esTitular}"/>
+   <param name="esConyuge" value="#{cruceList.esConyuge}"/>
+   <param name="nroCedulaTitular" value="#{cruceList.cruce.nroCedulaTitular}"/>
+   <param name="nroCedulaConyuge" value="#{cruceList.cruce.nroCedulaConyuge}"/>
+   <param name="asociacionPescador" value="#{cruceList.cruce.asociacionPescador}"/>
+
+</page>

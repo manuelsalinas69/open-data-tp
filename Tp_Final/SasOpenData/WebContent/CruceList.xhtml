@@ -31,7 +31,7 @@
 
 		<script type="text/javascript">
 		$(document).ready(function() {
-			load6();load1();load2();load3();load4();load5();
+			load6();load7();load1();load2();load3();load4();load5();
 		});
 
 
@@ -64,112 +64,130 @@
 				data="#{cruceManager.treeMapDataArray}"
 				oncomplete="plotTreeMapGroup(event.data,'#tkppsc')" />
 			<a:jsFunction name="load6"
-				action="#{cruceManager.getVennDiagram()}" execute="@this"
+				action="#{cruceManager.getVennDiagramTitular()}" execute="@this"
 				data="#{cruceManager.vennDto}"
-				oncomplete="vennDiagramFull(event.data,'#vennGeneralTitular')" />
-				<a:jsFunction name="load7"
+				oncomplete="vennDiagramFull(event.data,'#vennTitular')" />
+			<a:jsFunction name="load7"
 				action="#{cruceManager.getVennDiagramConyuge()}" execute="@this"
 				data="#{cruceManager.vennDto}"
-				oncomplete="vennDiagramFull(event.data,'#vennGeneralTitular')" />
+				oncomplete="vennDiagramFull(event.data,'#vennConyuge')" />
+			<a:jsFunction name="load8"
+				action="#{cruceManager.getVennDiagramGeneral()}" execute="@this"
+				data="#{cruceManager.vennDto}"
+				oncomplete="vennDiagramFull(event.data,'#vennGeneral')" />
 			<rich:tabPanel switchType="client">
 				<rich:tab header="Datos">
 
 
 					<h:panelGrid columns="2" columnClasses="top,top">
-						<rich:collapsiblePanel header="Filtros de Busqueda"
-							switchType="client">
-							<h:panelGrid>
+						<h:panelGrid>
+							<rich:collapsiblePanel header="Filtros de Busqueda"
+								switchType="client">
+								<h:panelGrid>
 
-								<s:decorate template="layout/display.xhtml">
-									<ui:define name="label">CI</ui:define>
-									<h:inputText id="nroCedula"
-										value="#{cruceList.cruce.nroCedula}" />
-								</s:decorate>
+									<s:decorate template="layout/display.xhtml">
+										<ui:define name="label">CI</ui:define>
+										<h:inputText id="nroCedula"
+											value="#{cruceList.cruce.nroCedula}" />
+									</s:decorate>
 
-								<s:decorate template="layout/display.xhtml">
-									<ui:define name="label">CI titular</ui:define>
-									<h:inputText id="nroCedulaTitular"
-										value="#{cruceList.cruce.nroCedulaTitular}" />
-								</s:decorate>
+									<s:decorate template="layout/display.xhtml">
+										<ui:define name="label">CI titular</ui:define>
+										<h:inputText id="nroCedulaTitular"
+											value="#{cruceList.cruce.nroCedulaTitular}" />
+									</s:decorate>
 
-								<s:decorate template="layout/display.xhtml">
-									<ui:define name="label">CI conyuge</ui:define>
-									<h:inputText id="nroCedulaConyuge"
-										value="#{cruceList.cruce.nroCedulaConyuge}" />
-								</s:decorate>
+									<s:decorate template="layout/display.xhtml">
+										<ui:define name="label">CI conyuge</ui:define>
+										<h:inputText id="nroCedulaConyuge"
+											value="#{cruceList.cruce.nroCedulaConyuge}" />
+									</s:decorate>
 
-								<s:decorate template="layout/display.xhtml">
-									<ui:define name="label">Nombre</ui:define>
-									<h:inputText id="nombreCompleto"
-										value="#{cruceList.cruce.nombreCompleto}" />
-								</s:decorate>
+									<s:decorate template="layout/display.xhtml">
+										<ui:define name="label">Nombre</ui:define>
+										<h:inputText id="nombreCompleto"
+											value="#{cruceList.cruce.nombreCompleto}" />
+									</s:decorate>
 
-								<s:decorate template="layout/display.xhtml">
-									<ui:define name="label">Distrito</ui:define>
-									<h:inputText id="distrito" value="#{cruceList.cruce.distrito}" />
-								</s:decorate>
-
-
-								<s:decorate template="layout/display.xhtml">
-									<ui:define name="label">Asociacion</ui:define>
-									<h:inputText id="asociacionPescador"
-										value="#{cruceList.cruce.asociacionPescador}" />
-								</s:decorate>
+									<s:decorate template="layout/display.xhtml">
+										<ui:define name="label">Distrito</ui:define>
+										<h:inputText id="distrito" value="#{cruceList.cruce.distrito}" />
+									</s:decorate>
 
 
-								<s:decorate template="layout/display.xhtml">
-									<ui:define name="label">Tekopora</ui:define>
-									<h:selectBooleanCheckbox id="tekopora"
-										value="#{cruceList.tekopora}" />
-								</s:decorate>
-
-								<s:decorate template="layout/display.xhtml">
-									<ui:define name="label">Tekoha</ui:define>
-									<h:selectBooleanCheckbox id="tekoha"
-										value="#{cruceList.tekoha}" />
-								</s:decorate>
-
-								<s:decorate template="layout/display.xhtml">
-									<ui:define name="label">Pescador</ui:define>
-									<h:selectBooleanCheckbox id="pescador"
-										value="#{cruceList.pescador}" />
-								</s:decorate>
-
-								<s:decorate template="layout/display.xhtml">
-									<ui:define name="label">Es titular</ui:define>
-									<h:selectBooleanCheckbox id="esTitular"
-										value="#{cruceList.esTitular}" />
-								</s:decorate>
-
-								<s:decorate template="layout/display.xhtml">
-									<ui:define name="label">Es conyuge</ui:define>
-									<h:selectBooleanCheckbox id="esConyuge"
-										value="#{cruceList.esConyuge}" />
-								</s:decorate>
+									<s:decorate template="layout/display.xhtml">
+										<ui:define name="label">Asociacion</ui:define>
+										<h:inputText id="asociacionPescador"
+											value="#{cruceList.cruce.asociacionPescador}" />
+									</s:decorate>
 
 
+									<s:decorate template="layout/display.xhtml">
+										<ui:define name="label">Tekopora</ui:define>
+										<h:selectBooleanCheckbox id="tekopora"
+											value="#{cruceList.tekopora}" />
+									</s:decorate>
 
-								<s:decorate template="layout/display.xhtml">
-									<ui:define name="label">Coincidir</ui:define>
-									<h:selectOneRadio id="logic" layout="pageDirection"
-										value="#{cruceList.restrictionLogicOperator}"
-										styleClass="radio">
-										<f:selectItem itemLabel="Todos los criterios" itemValue="and" />
-										<f:selectItem itemLabel="Algun criterio" itemValue="or" />
-									</h:selectOneRadio>
-								</s:decorate>
+									<s:decorate template="layout/display.xhtml">
+										<ui:define name="label">Tekoha</ui:define>
+										<h:selectBooleanCheckbox id="tekoha"
+											value="#{cruceList.tekoha}" />
+									</s:decorate>
 
-								<div class="actionButtons">
-									<h:panelGrid columns="2">
-										<h:commandButton id="search" value="Buscar"
-											action="/CruceList.xhtml">
-											<f:param name="firstResult" value="0" />
-										</h:commandButton>
-										<s:button id="reset" value="Todos" includePageParams="false" />
-									</h:panelGrid>
-								</div>
-							</h:panelGrid>
-						</rich:collapsiblePanel>
+									<s:decorate template="layout/display.xhtml">
+										<ui:define name="label">Pescador</ui:define>
+										<h:selectBooleanCheckbox id="pescador"
+											value="#{cruceList.pescador}" />
+									</s:decorate>
+
+									<s:decorate template="layout/display.xhtml">
+										<ui:define name="label">Es titular</ui:define>
+										<h:selectBooleanCheckbox id="esTitular"
+											value="#{cruceList.esTitular}" />
+									</s:decorate>
+
+									<s:decorate template="layout/display.xhtml">
+										<ui:define name="label">Es conyuge</ui:define>
+										<h:selectBooleanCheckbox id="esConyuge"
+											value="#{cruceList.esConyuge}" />
+									</s:decorate>
+
+
+
+									<s:decorate template="layout/display.xhtml">
+										<ui:define name="label">Coincidir</ui:define>
+										<h:selectOneRadio id="logic" layout="pageDirection"
+											value="#{cruceList.restrictionLogicOperator}"
+											styleClass="radio">
+											<f:selectItem itemLabel="Todos los criterios" itemValue="and" />
+											<f:selectItem itemLabel="Algun criterio" itemValue="or" />
+										</h:selectOneRadio>
+									</s:decorate>
+
+									<div class="actionButtons">
+										<h:panelGrid columns="2">
+											<h:commandButton id="search" value="Buscar"
+												action="/CruceList.xhtml">
+												<f:param name="firstResult" value="0" />
+											</h:commandButton>
+											<s:button id="reset" value="Todos" includePageParams="false" />
+										</h:panelGrid>
+									</div>
+								</h:panelGrid>
+							</rich:collapsiblePanel>
+							
+							<rich:panel>
+									<div class="imgBtn"
+										>
+										<h:graphicImage value="/img/csv.png"  />
+									</div>
+									<h:commandButton action="#{exportManager.exportCruce()}"
+										value="Descargar datos"
+										style="position:relative;top:50%;left:10%" />
+
+
+								</rich:panel>
+						</h:panelGrid>
 
 
 
@@ -381,15 +399,16 @@
 						
 						<span><h2>Resumen de cruces de datos</h2></span>
 						<p>Grafico general de cruces entre los 3 programas de la SAS</p>
-						<h:panelGrid columns="2">
+						<h:panelGrid columns="3">
+							
 							<h:panelGrid>	
 								<p>Cruzando los datos de titulares del Programa Tekoha</p>
-								<div id="vennGeneralTitular" styleClass="vennClass" style="height: 350px"></div>
+								<div id="vennTitular" styleClass="vennClass" style="height: 500px"></div>
 							</h:panelGrid>
 							<h:panelGrid>	
 								
 								<p>Cruzando los datos de conyuges del Programa Tekoha</p>
-								<div id="vennGeneralConyuge" styleClass="vennClass" style="height: 350px"></div>
+								<div id="vennConyuge" styleClass="vennClass" style="height: 500px"></div>
 							</h:panelGrid>
 							
 						
