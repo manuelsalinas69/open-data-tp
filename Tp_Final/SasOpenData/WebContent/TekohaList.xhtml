@@ -45,6 +45,12 @@
 		<h:form>
 			<!-- Functions -->
 			<div>
+				<script type="text/javascript">
+					$(document).ready(function(){
+						load1();
+					});
+				</script>
+				
 				<a:jsFunction name="load1"
 					action="#{estadisticasManager.tkh_terrenosPorDistrito2()}"
 					execute="@this" data="#{estadisticasManager.treeMapDataArray}"
@@ -53,9 +59,14 @@
 
 				<link rel="stylesheet" type="text/css"
 					href="#{facesContext.externalContext.requestContextPath}/styles/jplot/jquery.jqplot.css" />
-				<rich:tabPanel switchType="client">
+				<rich:tabPanel switchType="client" >
+					<rich:tab header="Graficos" onheaderclick="load1()" >
+						<span><h2>Tekoha - Cantidad de terrenos otorgados por
+								departamento</h2></span>
+						<div id="terrenoPorDepto" style="height: 350px"></div>
+					</rich:tab>
 					<rich:tab header="Datos">
-						<div >
+						<div>
 
 							<h:panelGrid columns="2" columnClasses="top,top">
 
@@ -258,12 +269,6 @@
 						</div>
 
 					</rich:tab>
-					<rich:tab header="Graficos" onheaderclick="load1()">
-						<span><h2>Tekoha - Cantidad de terrenos otorgados por
-								departamento</h2></span>
-						<div id="terrenoPorDepto" style="height: 350px"></div>
-					</rich:tab>
-
 				</rich:tabPanel>
 
 			</div>

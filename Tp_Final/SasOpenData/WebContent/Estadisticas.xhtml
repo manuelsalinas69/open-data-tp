@@ -72,6 +72,50 @@
 				data="#{cruceManager.vennDto}"
 				oncomplete="vennDiagramFull(event.data,'#vennGeneralTitular')" />
 			<rich:tabPanel switchType="client">
+				<rich:tab header="Graficos">
+					<h:panelGrid width="1000">
+						
+						<span><h2>Resumen de cruces de datos</h2></span>
+						<p>Grafico general de cruces entre los 3 programas de la SAS</p>
+						<h:panelGrid columns="2">
+							<h:panelGrid>	
+								<p>Cruzando los datos de titulares del Programa Tekoha</p>
+								<div id="vennGeneralTitular" styleClass="vennClass" style="height: 350px"></div>
+							</h:panelGrid>
+							<h:panelGrid>	
+								
+								<p>Cruzando los datos de conyuges del Programa Tekoha</p>
+								<div id="vennGeneralConyuge" styleClass="vennClass" style="height: 350px"></div>
+							</h:panelGrid>
+							
+						
+						</h:panelGrid>
+
+						<span><h2>Tekoha - Tekopora - Titular</h2></span>
+						<p>Titulares del programa Tekoha que estan a la vez en el
+							programa de Tekopora</p>
+						<div id="tkhtkpTitular" style="height: 350px"></div>
+						<span><h2>Tekoha - Tekopora - Conyuge</h2></span>
+						<p>Conyuges del programa Tekoha que estan a la vez en el
+							programa de Tekopora</p>
+						<div id="tkhtkpConyuge" style="height: 350px"></div>
+						<span><h2>Tekoha - Pescadores - Titular</h2></span>
+						<p>Titulares del programa Tekoha que estan a la vez en el
+							programa de Pescadores</p>
+						<div id="tkhpscTitular" style="height: 350px"></div>
+						<span><h2>Tekoha - Pescadores - Conyuge</h2></span>
+						<p>Conyuges del programa Tekoha que estan a la vez en el
+							programa de Pescadores</p>
+						<div id="tkhpscConyuge" style="height: 350px"></div>
+						<span><h2>Tekopora - Pescadores</h2></span>
+						<p>Beneficiados del programa Tekopora que estan a la vez en el
+							programa de Pescadores</p>
+						<div id="tkppsc" style="height: 350px"></div>
+						<div id="vennTooltip"></div>
+
+					</h:panelGrid>
+				</rich:tab>
+				
 				<rich:tab header="Datos">
 
 
@@ -322,7 +366,7 @@
 									</h:column>
 									<h:column>
 										<f:facet name="header">
-											<ui:include src="layout/sort.xhtml">
+											<</sript>ui:include src="layout/sort.xhtml">
 												<ui:param name="entityList" value="#{cruceList}" />
 												<ui:param name="propertyLabel" value="Asociacion pescador" />
 												<ui:param name="propertyPath"
@@ -374,50 +418,6 @@
 
 					</h:panelGrid>
 
-				</rich:tab>
-
-				<rich:tab header="Graficos">
-					<h:panelGrid width="1000">
-						
-						<span><h2>Resumen de cruces de datos</h2></span>
-						<p>Grafico general de cruces entre los 3 programas de la SAS</p>
-						<h:panelGrid columns="2">
-							<h:panelGrid>	
-								<p>Cruzando los datos de titulares del Programa Tekoha</p>
-								<div id="vennGeneralTitular" styleClass="vennClass" style="height: 350px"></div>
-							</h:panelGrid>
-							<h:panelGrid>	
-								
-								<p>Cruzando los datos de conyuges del Programa Tekoha</p>
-								<div id="vennGeneralConyuge" styleClass="vennClass" style="height: 350px"></div>
-							</h:panelGrid>
-							
-						
-						</h:panelGrid>
-
-						<span><h2>Tekoha - Tekopora - Titular</h2></span>
-						<p>Titulares del programa Tekoha que estan a la vez en el
-							programa de Tekopora</p>
-						<div id="tkhtkpTitular" style="height: 350px"></div>
-						<span><h2>Tekoha - Tekopora - Conyuge</h2></span>
-						<p>Conyuges del programa Tekoha que estan a la vez en el
-							programa de Tekopora</p>
-						<div id="tkhtkpConyuge" style="height: 350px"></div>
-						<span><h2>Tekoha - Pescadores - Titular</h2></span>
-						<p>Titulares del programa Tekoha que estan a la vez en el
-							programa de Pescadores</p>
-						<div id="tkhpscTitular" style="height: 350px"></div>
-						<span><h2>Tekoha - Pescadores - Conyuge</h2></span>
-						<p>Conyuges del programa Tekoha que estan a la vez en el
-							programa de Pescadores</p>
-						<div id="tkhpscConyuge" style="height: 350px"></div>
-						<span><h2>Tekopora - Pescadores</h2></span>
-						<p>Beneficiados del programa Tekopora que estan a la vez en el
-							programa de Pescadores</p>
-						<div id="tkppsc" style="height: 350px"></div>
-						<div id="vennTooltip"></div>
-
-					</h:panelGrid>
 				</rich:tab>
 
 			</rich:tabPanel>

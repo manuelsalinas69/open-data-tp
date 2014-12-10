@@ -46,12 +46,21 @@
 		<link rel="stylesheet" type="text/css"
 			href="#{facesContext.externalContext.requestContextPath}/styles/jplot/jquery.jqplot.css" />
 		<h:form id="pescadoresSearch" styleClass="edit">
-
+			<script type="text/javascript">
+					$(document).ready(function(){
+						load5();
+					});
+			</script>
 			<a:jsFunction name="load5"
 				action="#{estadisticasManager.psc_MontosPorAsociacion()}"
 				execute="@this" data="#{estadisticasManager.treeMapDataArray}"
 				oncomplete="plotTreeMap(event.data,'#montosPescadores')" />
 			<rich:tabPanel switchType="client">
+				<rich:tab header="Graficos" onheaderclick="load5()">
+					<span><h2>Pescadores - Cantidad de subsidio mensual
+							otorgado a los pescadores por asociacion</h2></span>
+					<div id="montosPescadores" style="height: 350px"></div>
+				</rich:tab>
 				<rich:tab header="Datos">
 					<div>
 						<h:panelGrid columns="2" columnClasses="top,top">
@@ -121,7 +130,7 @@
 										value="#{pescadoresList.resultList}"
 										rendered="#{not empty pescadoresList.resultList}"
 										rowClasses="odd-row, even-row">
-										<h:column>
+										<!-- <h:column>
 											<f:facet name="header">
 												<ui:include src="layout/sort.xhtml">
 													<ui:param name="entityList" value="#{pescadoresList}" />
@@ -130,7 +139,7 @@
 												</ui:include>
 											</f:facet>
 											<h:outputText value="#{_pescadores.id}" />
-										</h:column>
+										</h:column> -->
 										<h:column>
 											<f:facet name="header">
 												<ui:include src="layout/sort.xhtml">
@@ -236,11 +245,6 @@
 
 						</h:panelGrid>
 					</div>
-				</rich:tab>
-				<rich:tab header="Graficos" onheaderclick="load5()">
-					<span><h2>Pescadores - Cantidad de subsidio mensual
-							otorgado a los pescadores por asociacion</h2></span>
-					<div id="montosPescadores" style="height: 350px"></div>
 				</rich:tab>
 			</rich:tabPanel>
 
