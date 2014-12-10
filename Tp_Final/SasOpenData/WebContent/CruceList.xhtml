@@ -31,7 +31,7 @@
 
 
 		
-		<h:form>
+		<h:form id="cruceForm">
 			<script type="text/javascript">
 				$(document).ready(function() {
 					load6();load7();load1();load2();load3();load4();load5();
@@ -72,8 +72,8 @@
 				action="#{cruceManager.getVennDiagramGeneral()}" execute="@this"
 				data="#{cruceManager.vennDto}"
 				oncomplete="vennDiagramFull(event.data,'#vennGeneral')" />
-			<rich:tabPanel switchType="client">
-				<rich:tab header="Graficos" onheaderclick="load6();load7();load1();load2();load3();load4();load5();">
+			<rich:tabPanel switchType="client" activeItem="#{tabId}" >
+				<rich:tab id="graficos" header="Graficos" onheaderclick="load6();load7();load1();load2();load3();load4();load5();">
 					<h:panelGrid width="1000">
 						
 						<span><h2>Resumen de cruces de datos</h2></span>
@@ -118,7 +118,7 @@
 					</h:panelGrid>
 				</rich:tab>
 				
-				<rich:tab header="Datos">
+				<rich:tab id="datos" header="Datos">
 
 
 					<h:panelGrid columns="2" columnClasses="top,top">
@@ -220,8 +220,11 @@
 											<h:commandButton id="search" value="Buscar"
 												action="/CruceList.xhtml">
 												<f:param name="firstResult" value="0" />
+												<f:param name="tabId" value="cruceForm:datos"/>
 											</h:commandButton>
-											<s:button id="reset" value="Todos" includePageParams="false" />
+											<s:button id="reset" value="Todos" includePageParams="false" >
+												<f:param name="tabId" value="cruceForm:datos"/>
+											</s:button>
 										</h:panelGrid>
 									</div>
 								</h:panelGrid>
@@ -417,6 +420,7 @@
 									value="#{messages.left}#{messages.left} Primera Pagina"
 									id="firstPage">
 									<f:param name="firstResult" value="0" />
+									<f:param name="tabId" value="cruceForm:datos"/>
 								</s:link>
 
 								<s:link view="/CruceList.xhtml"
@@ -424,6 +428,7 @@
 									value="#{messages.left} Pagina Previa" id="previousPage">
 									<f:param name="firstResult"
 										value="#{cruceList.previousFirstResult}" />
+									<f:param name="tabId" value="cruceForm:datos"/>
 								</s:link>
 
 								<s:link view="/CruceList.xhtml"
@@ -431,6 +436,7 @@
 									value="Pagina Siguiente #{messages.right}" id="nextPage">
 									<f:param name="firstResult"
 										value="#{cruceList.nextFirstResult}" />
+									<f:param name="tabId" value="cruceForm:datos"/>
 								</s:link>
 
 								<s:link view="/CruceList.xhtml"
@@ -439,6 +445,7 @@
 									id="lastPage">
 									<f:param name="firstResult"
 										value="#{cruceList.lastFirstResult}" />
+									<f:param name="tabId" value="cruceForm:datos"/>
 								</s:link>
 
 							</div>

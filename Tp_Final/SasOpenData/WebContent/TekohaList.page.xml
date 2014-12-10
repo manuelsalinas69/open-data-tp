@@ -17,5 +17,6 @@
    <param name="distrito" value="#{tekohaList.tekoha.distrito}"/>
    <param name="territorioSocial" value="#{tekohaList.tekoha.territorioSocial}"/>
    <param name="manzana" value="#{tekohaList.tekoha.manzana}"/>
+   <param name="tabId"/>
 
 </page>

@@ -13,5 +13,6 @@
    <param name="nombre" value="#{pescadoresList.pescadores.nombre}"/>
    <param name="apellido" value="#{pescadoresList.pescadores.apellido}"/>
    <param name="asociacion" value="#{pescadoresList.pescadores.asociacion}"/>
+   <param name="tabId"/>
 
 </page>

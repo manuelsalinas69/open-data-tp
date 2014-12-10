@@ -45,7 +45,7 @@
 
 		<link rel="stylesheet" type="text/css"
 			href="#{facesContext.externalContext.requestContextPath}/styles/jplot/jquery.jqplot.css" />
-		<h:form id="pescadoresSearch" styleClass="edit">
+		<h:form id="pescadores" styleClass="edit">
 			<script type="text/javascript">
 					$(document).ready(function(){
 						load5();
@@ -55,13 +55,13 @@
 				action="#{estadisticasManager.psc_MontosPorAsociacion()}"
 				execute="@this" data="#{estadisticasManager.treeMapDataArray}"
 				oncomplete="plotTreeMap(event.data,'#montosPescadores')" />
-			<rich:tabPanel switchType="client">
+			<rich:tabPanel switchType="client" activeItem="#{tabId}">
 				<rich:tab header="Graficos" onheaderclick="load5()">
 					<span><h2>Pescadores - Cantidad de subsidio mensual
 							otorgado a los pescadores por asociacion</h2></span>
 					<div id="montosPescadores" style="height: 350px"></div>
 				</rich:tab>
-				<rich:tab header="Datos">
+				<rich:tab id="datos" header="Datos">
 					<div>
 						<h:panelGrid columns="2" columnClasses="top,top">
 							<h:panelGrid>
@@ -96,8 +96,13 @@
 										<div class="actionButtons">
 											<h:panelGrid columns="2">
 												<h:commandButton id="search" value="Buscar"
-													action="/PescadoresList.xhtml" />
-												<s:button id="reset" value="Todos" includePageParams="false" />
+													action="/PescadoresList.xhtml" >
+													<f:param name="firstResult" value="0" />
+													<f:param name="tabId" value="pescadores:datos"/>
+												</h:commandButton>
+												<s:button id="reset" value="Todos" includePageParams="false" >
+													<f:param name="tabId" value="pescadores:datos"/>
+												</s:button>
 											</h:panelGrid>
 										</div>
 									</h:panelGrid>
@@ -215,6 +220,7 @@
 										value="#{messages.left}#{messages.left} Primera Pagina"
 										id="firstPage">
 										<f:param name="firstResult" value="0" />
+										<f:param name="tabId" value="pescadores:datos"/>
 									</s:link>
 
 									<s:link view="/PescadoresList.xhtml"
@@ -222,6 +228,7 @@
 										value="#{messages.left} Pagina Previa" id="previousPage">
 										<f:param name="firstResult"
 											value="#{pescadoresList.previousFirstResult}" />
+											<f:param name="tabId" value="pescadores:datos"/>
 									</s:link>
 
 									<s:link view="/PescadoresList.xhtml"
@@ -229,6 +236,7 @@
 										value="Pagina Siguiente #{messages.right}" id="nextPage">
 										<f:param name="firstResult"
 											value="#{pescadoresList.nextFirstResult}" />
+										<f:param name="tabId" value="pescadores:datos"/>
 									</s:link>
 
 									<s:link view="/PescadoresList.xhtml"
@@ -237,6 +245,7 @@
 										id="lastPage">
 										<f:param name="firstResult"
 											value="#{pescadoresList.lastFirstResult}" />
+										<f:param name="tabId" value="pescadores:datos"/>
 									</s:link>
 
 								</div>

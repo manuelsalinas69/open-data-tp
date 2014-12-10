@@ -42,7 +42,7 @@
 			src="#{facesContext.externalContext.requestContextPath}/javascript/utils/d3jsUtil.js"></script>
 
 
-		<h:form>
+		<h:form id="tekoha">
 			<!-- Functions -->
 			<div>
 				<script type="text/javascript">
@@ -59,13 +59,13 @@
 
 				<link rel="stylesheet" type="text/css"
 					href="#{facesContext.externalContext.requestContextPath}/styles/jplot/jquery.jqplot.css" />
-				<rich:tabPanel switchType="client" >
+				<rich:tabPanel switchType="client" activeItem="#{tabId}">
 					<rich:tab header="Graficos" onheaderclick="load1()" >
 						<span><h2>Tekoha - Cantidad de terrenos otorgados por
 								departamento</h2></span>
 						<div id="terrenoPorDepto" style="height: 350px"></div>
 					</rich:tab>
-					<rich:tab header="Datos">
+					<rich:tab header="Datos" id="datos">
 						<div>
 
 							<h:panelGrid columns="2" columnClasses="top,top">
@@ -117,9 +117,14 @@
 											<div class="actionButtons">
 												<h:panelGrid columns="2">
 													<h:commandButton id="search" value="Buscar"
-														action="/TekohaList.xhtml" />
+														action="/TekohaList.xhtml" >
+														<f:param name="tabId" value="tekoha:datos"/>
+														<f:param name="firstResult" value="0" />
+													</h:commandButton>
 													<s:button id="reset" value="Todos"
-														includePageParams="false" />
+														includePageParams="false" >
+														<f:param name="tabId" value="tekoha:datos"/>
+													</s:button>
 												</h:panelGrid>
 											</div>
 										</h:panelGrid>
@@ -238,6 +243,7 @@
 											value="#{messages.left}#{messages.left} Primera Pagina"
 											id="firstPage">
 											<f:param name="firstResult" value="0" />
+											<f:param name="tabId" value="tekoha:datos"/>
 										</s:link>
 
 										<s:link view="/TekohaList.xhtml"
@@ -245,6 +251,7 @@
 											value="#{messages.left} Pagina Previa" id="previousPage">
 											<f:param name="firstResult"
 												value="#{tekohaList.previousFirstResult}" />
+											<f:param name="tabId" value="tekoha:datos"/>
 										</s:link>
 
 										<s:link view="/TekohaList.xhtml"
@@ -252,6 +259,7 @@
 											value="Pagina Siguiente #{messages.right}" id="nextPage">
 											<f:param name="firstResult"
 												value="#{tekohaList.nextFirstResult}" />
+											<f:param name="tabId" value="tekoha:datos"/>
 										</s:link>
 
 										<s:link view="/TekohaList.xhtml"
@@ -260,6 +268,7 @@
 											id="lastPage">
 											<f:param name="firstResult"
 												value="#{tekohaList.lastFirstResult}" />
+											<f:param name="tabId" value="tekoha:datos"/>
 										</s:link>
 
 									</div>

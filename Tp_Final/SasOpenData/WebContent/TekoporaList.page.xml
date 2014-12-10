@@ -13,5 +13,6 @@
    <param name="nombre" value="#{tekoporaList.tekopora.nombre}"/>
    <param name="departamento" value="#{tekoporaList.idDepartamento}"/>
    <param name="distrito" value="#{tekoporaList.tekopora.distrito}"/>
+   <param name="tabId"/>
 
 </page>

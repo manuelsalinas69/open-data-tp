@@ -45,7 +45,7 @@
 
 		<link rel="stylesheet" type="text/css"
 			href="#{facesContext.externalContext.requestContextPath}/styles/jplot/jquery.jqplot.css" />
-		<h:form id="tekoporaSearch" styleClass="edit">
+		<h:form id="tekopora" styleClass="edit">
 			<script type="text/javascript">
 					$(document).ready(function(){
 						load3();
@@ -56,13 +56,13 @@
 				execute="@this" data="#{estadisticasManager.treeMapDataArray}"
 				oncomplete="plotTreeMapGroup(event.data,'#montosPorDepto')" />
 
-			<rich:tabPanel switchType="client">
+			<rich:tabPanel switchType="client" activeItem="#{tabId}">
 				<rich:tab header="Graficos" onheaderclick="load3()">
 					<span><h2>Tekopora - Cantidad de aporte mensual
 							otorgado por departamento</h2></span>
 					<div id="montosPorDepto" style="height: 350px"></div>
 				</rich:tab>
-				<rich:tab header="Datos">
+				<rich:tab id="datos" header="Datos">
 					<div >
 
 						<h:panelGrid columns="2" columnClasses="top,top">
@@ -101,8 +101,13 @@
 										<div class="actionButtons">
 											<h:panelGrid columns="2">
 												<h:commandButton id="search" value="Buscar"
-													action="/TekoporaList.xhtml" />
-												<s:button id="reset" value="Todos" includePageParams="false" />
+													action="/TekoporaList.xhtml" >
+													<f:param name="tabId" value="tekopora:datos"/>
+													<f:param name="firstResult" value="0" />
+												</h:commandButton>
+												<s:button id="reset" value="Todos" includePageParams="false" >
+													<f:param name="tabId" value="tekopora:datos"/>
+												</s:button>
 											</h:panelGrid>
 										</div>
 									</h:panelGrid>
@@ -202,6 +207,7 @@
 										value="#{messages.left}#{messages.left} Primera Pagina"
 										id="firstPage">
 										<f:param name="firstResult" value="0" />
+										<f:param name="tabId" value="tekopora:datos"/>
 									</s:link>
 
 									<s:link view="/TekoporaList.xhtml"
@@ -209,6 +215,7 @@
 										value="#{messages.left} Pagina Previa" id="previousPage">
 										<f:param name="firstResult"
 											value="#{tekoporaList.previousFirstResult}" />
+										<f:param name="tabId" value="tekopora:datos"/>
 									</s:link>
 
 									<s:link view="/TekoporaList.xhtml"
@@ -216,6 +223,7 @@
 										value="Pagina Siguiente #{messages.right}" id="nextPage">
 										<f:param name="firstResult"
 											value="#{tekoporaList.nextFirstResult}" />
+										<f:param name="tabId" value="tekopora:datos"/>
 									</s:link>
 
 									<s:link view="/TekoporaList.xhtml"
@@ -224,6 +232,7 @@
 										id="lastPage">
 										<f:param name="firstResult"
 											value="#{tekoporaList.lastFirstResult}" />
+										<f:param name="tabId" value="tekopora:datos"/>
 									</s:link>
 
 								</div>
