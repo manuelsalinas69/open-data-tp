@@ -7,5 +7,6 @@
     <s:link styleClass="columnHeader" value="#{propertyLabel} #{entityList.orderColumn == propertyPath ? (entityList.orderDirection == 'desc' ? messages.down : messages.up) : ''}">
         <f:param name="sort" value="#{propertyPath}"/>
         <f:param name="dir" value="#{entityList.orderColumn == propertyPath and entityList.orderDirection == 'asc' ? 'desc' : 'asc'}"/>
+         <f:param name="tabId" value="#{tabId}"/>
     </s:link>
 </ui:composition>
