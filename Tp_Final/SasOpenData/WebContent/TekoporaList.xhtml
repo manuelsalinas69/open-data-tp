@@ -186,13 +186,18 @@
 											</f:facet>
 											<h:outputText value="#{_tekopora.distrito}" />
 										</rich:column>
+										
 										<h:column>
+											
+											
 											<f:facet name="header">
 												<ui:include src="layout/sort.xhtml">
 													<ui:param name="entityList" value="#{tekoporaList}" />
 													<ui:param name="propertyLabel" value="Importe mensual" />
 													<ui:param name="propertyPath"
 														value="tekopora.importeMensual" />
+													
+													
 													<ui:param name="tabId" value="tekopora:datos"/>
 												</ui:include>
 											</f:facet>
