@@ -13,6 +13,7 @@ function vennDiagram(data,selector) {
 }
 
 function vennDiagramFull(data,selector) {
+	$(selector).children().remove();
 	//var sets = [{label: "A", size: 10}, {label: "B", size: 10}],
 //	overlaps = [{sets: [0,1], size: 2}];
 	var sets=data.sets;

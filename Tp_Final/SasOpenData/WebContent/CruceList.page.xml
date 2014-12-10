@@ -20,5 +20,6 @@
    <param name="nroCedulaTitular" value="#{cruceList.cruce.nroCedulaTitular}"/>
    <param name="nroCedulaConyuge" value="#{cruceList.cruce.nroCedulaConyuge}"/>
    <param name="asociacionPescador" value="#{cruceList.cruce.asociacionPescador}"/>
+   <param name="idDepartamento" value="#{cruceList.idDepartamento}"/>
 
 </page>

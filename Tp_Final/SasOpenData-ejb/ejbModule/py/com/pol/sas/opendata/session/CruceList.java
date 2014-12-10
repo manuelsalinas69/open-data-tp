@@ -19,6 +19,7 @@ public class CruceList extends EntityQuery<Cruce> {
 			"lower(cruce.pescador) =lower(#{cruceList.psc})",
 			"lower(cruce.esTitular) = lower(#{cruceList.tit})",
 			"lower(cruce.esConyuge)=lower(#{cruceList.cony})",
+			"cruce.departamento.idDepartamento=#{cruceList.idDepartamento}",
 			"lower(cruce.nroCedulaTitular) like lower(concat(#{cruceList.cruce.nroCedulaTitular},'%'))",
 			"lower(cruce.nroCedulaConyuge) like lower(concat(#{cruceList.cruce.nroCedulaConyuge},'%'))",
 			"lower(cruce.asociacionPescador) like lower(concat('%',#{cruceList.cruce.asociacionPescador},'%'))", };
@@ -30,6 +31,7 @@ public class CruceList extends EntityQuery<Cruce> {
 	private Boolean tekoha;
 	private Boolean tekopora;
 	private Boolean pescador;
+	private Long idDepartamento;
 
 	public CruceList() {
 		setEjbql(EJBQL);
@@ -112,6 +114,14 @@ public class CruceList extends EntityQuery<Cruce> {
 
 	public void setPescador(Boolean pescador) {
 		this.pescador = pescador;
+	}
+
+	public Long getIdDepartamento() {
+		return idDepartamento;
+	}
+
+	public void setIdDepartamento(Long idDepartamento) {
+		this.idDepartamento = idDepartamento;
 	}
 	
 	

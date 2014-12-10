@@ -29,14 +29,6 @@
 
 
 
-		<script type="text/javascript">
-		$(document).ready(function() {
-			load6();load7();load1();load2();load3();load4();load5();
-		});
-
-
-		
-		</script>
 
 		
 		<h:form>
@@ -107,6 +99,15 @@
 										<ui:define name="label">Nombre</ui:define>
 										<h:inputText id="nombreCompleto"
 											value="#{cruceList.cruce.nombreCompleto}" />
+									</s:decorate>
+									
+									<s:decorate template="layout/display.xhtml">
+										<ui:define name="label">Departamento</ui:define>
+										<h:selectOneMenu id="idDepartamento" value="#{cruceList.idDepartamento}" >
+											<f:selectItems value="#{departamentoSelectItemsAll}"/>
+										</h:selectOneMenu>
+											
+										
 									</s:decorate>
 
 									<s:decorate template="layout/display.xhtml">
@@ -400,7 +401,7 @@
 
 				</rich:tab>
 
-				<rich:tab header="Graficos">
+				<rich:tab header="Graficos" onheaderclick="load6();load7();load1();load2();load3();load4();load5();">
 					<h:panelGrid width="1000">
 						
 						<span><h2>Resumen de cruces de datos</h2></span>
